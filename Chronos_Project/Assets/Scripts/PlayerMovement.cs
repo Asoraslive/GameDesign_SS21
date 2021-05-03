@@ -7,8 +7,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     public CharacterController controller;
     [SerializeField]
-    public Rigidbody rb;
-    [SerializeField]
     public float speed = 12f;
     [SerializeField]
     public float gravity = 5f;
@@ -28,7 +26,6 @@ public class PlayerMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rb = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -39,6 +36,11 @@ public class PlayerMovement : MonoBehaviour
         if(isGrounded)
         {
             moveY = -2f;
+
+            if (Input.GetButtonDown("Jump"))
+            {
+                moveY = height;
+            }
         }
 
 
@@ -47,11 +49,7 @@ public class PlayerMovement : MonoBehaviour
 
         Vector3 move = transform.right * x + transform.forward * z;
 
-        if (Input.GetButtonDown("Jump"))
-        {
-            Debug.Log("Space has been pressed");
-            moveY = height;
-        }
+
 
         moveY -= gravity * Time.deltaTime;
 
