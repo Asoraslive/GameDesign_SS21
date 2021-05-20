@@ -15,7 +15,7 @@ public class WallRun : MonoBehaviour
     [Header("Wall Running")]
     [SerializeField] private float wallRunGravity;
     [SerializeField] private float wallRunJumpForce;
-
+    public bool currentlyWallrunning { get; set; }
 
     [Header("Camera")]
     [SerializeField] private Camera cam;
@@ -80,8 +80,8 @@ public class WallRun : MonoBehaviour
 
    void StartWallRun()
     {
-        rb.useGravity = false;
-
+        //rb.useGravity = false;
+        currentlyWallrunning = true;
         rb.AddForce(Vector3.down * wallRunGravity, ForceMode.Force);
 
         cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, wallRunfov, wallRunfovTime*Time.deltaTime);
@@ -115,7 +115,8 @@ public class WallRun : MonoBehaviour
 
     void StopWallRun()
     {
-        rb.useGravity = true;
+        //rb.useGravity = true;
+        currentlyWallrunning = false;
         cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, wallRunfovTime * Time.deltaTime);
         tilt = Mathf.Lerp(tilt, 0, camTiltTime * Time.deltaTime);
 

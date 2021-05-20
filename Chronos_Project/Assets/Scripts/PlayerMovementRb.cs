@@ -24,6 +24,9 @@ public class PlayerMovementRb : MonoBehaviour
     [Header("Drag")]
     [SerializeField] float groundDrag = 6f;
     [SerializeField] float airDrag = 2f;
+    [SerializeField] float gravity=14.0f;
+    [SerializeField] float verticalVelocity;
+    [SerializeField] Vector3 gravityMove;
 
     float horizontalMovement;
     float verticalMovement;
@@ -40,7 +43,9 @@ public class PlayerMovementRb : MonoBehaviour
     Vector3 moveDirection;
     Vector3 slopeMoveDirection;
 
+    [Header("References")]
     Rigidbody rb;
+    [SerializeField] WallRun wallRunScript;
 
     RaycastHit slopeHit;
 
@@ -73,6 +78,7 @@ public class PlayerMovementRb : MonoBehaviour
     private void Update()
     {
         isGrounded = Physics.CheckSphere(groundCheck.position,groundDistance,groundMask);
+        GravityHandler();
         MyInput();
         ControlDrag();
         ControlSpeed();
@@ -83,6 +89,33 @@ public class PlayerMovementRb : MonoBehaviour
         }
 
         slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
+    }
+
+    void GravityHandler()
+    {
+        if (isGrounded)
+        {
+            verticalVelocity = -gravity*Time.deltaTime;
+
+        }
+        else if (wallRunScript.currentlyWallrunning)
+        {
+            verticalVelocity = 0f;
+        }
+        else
+        {
+            if (verticalVelocity < -14f)
+            {
+                verticalVelocity = -14f;
+            }
+            else
+            {
+                verticalVelocity -= gravity * Time.deltaTime;
+            }
+        }
+
+        gravityMove = new Vector3(0f, verticalVelocity, 0f);
+        rb.AddForce(gravityMove);
     }
 
     void Jump()
