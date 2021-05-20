@@ -34,7 +34,7 @@ public class PlayerMovementRb : MonoBehaviour
     [Header("Grounded")]
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundMask;
-    bool isGrounded;
+    [SerializeField] bool isGrounded;
     float groundDistance = 0.4f;
 
     [Header("Keybinds")]
@@ -46,9 +46,11 @@ public class PlayerMovementRb : MonoBehaviour
     [Header("References")]
     Rigidbody rb;
     [SerializeField] WallRun wallRunScript;
+    [SerializeField] WaterControl waterControlScript;
 
     RaycastHit slopeHit;
 
+    //slope Detection
     private bool OnSlope()
     {
         if (Physics.Raycast(transform.position, Vector3.down, out slopeHit, playerHeight / 2 + .5f))
@@ -83,7 +85,7 @@ public class PlayerMovementRb : MonoBehaviour
         ControlDrag();
         ControlSpeed();
 
-        if (Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded )
         {
             Jump();
         }
@@ -93,20 +95,24 @@ public class PlayerMovementRb : MonoBehaviour
 
     void GravityHandler()
     {
-        if (isGrounded)
+        if (isGrounded) // regular gravity while on ground
         {
             verticalVelocity = -gravity*Time.deltaTime;
 
         }
-        else if (wallRunScript.currentlyWallrunning)
+        else if (wallRunScript.currentlyWallrunning) //gravity while wallRunning
+        {
+            verticalVelocity = 0f;
+        }
+        else if (waterControlScript.isInWater)//swim gravity
         {
             verticalVelocity = 0f;
         }
         else
-        {
-            if (verticalVelocity < -14f)
+        { // Fall gravity capped
+            if (verticalVelocity < -gravity)
             {
-                verticalVelocity = -14f;
+                verticalVelocity = -gravity;
             }
             else
             {
@@ -120,14 +126,14 @@ public class PlayerMovementRb : MonoBehaviour
 
     void Jump()
     {
-        if (isGrounded)
-        {
-            rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+        rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+
             rb.AddForce(transform.up * jumpforce, ForceMode.Impulse);
-        }
+
+
     }
 
-    void MyInput()
+    void MyInput() //basic movement
     {
         horizontalMovement = Input.GetAxis("Horizontal");
         verticalMovement = Input.GetAxis("Vertical");
@@ -135,7 +141,7 @@ public class PlayerMovementRb : MonoBehaviour
         moveDirection = orientation.forward * verticalMovement + orientation.right * horizontalMovement;
     }
 
-    void ControlSpeed()
+    void ControlSpeed() //Sprint
     {
         if(Input.GetKey(sprintKey) && isGrounded)
         {
@@ -147,7 +153,7 @@ public class PlayerMovementRb : MonoBehaviour
         }
     }
 
-    void ControlDrag()
+    void ControlDrag() //Drag Control
     {
         if (isGrounded)
         {
@@ -164,7 +170,7 @@ public class PlayerMovementRb : MonoBehaviour
         MovePlayer();
     }
 
-    void MovePlayer()
+    void MovePlayer() //Moving the player
     {
         if (isGrounded && !OnSlope())
         {
