@@ -11,11 +11,15 @@ public class WallRun : MonoBehaviour
 
     [Header("Detection")]
     [SerializeField] float wallDistance = .5f;
+    [SerializeField] LayerMask wallMask;
+
 
     [Header("Wall Running")]
     [SerializeField] private float wallRunGravity;
     [SerializeField] private float wallRunJumpForce;
+    [SerializeField] bool wallruns;
     public bool currentlyWallrunning { get; set; }
+
 
     [Header("Camera")]
     [SerializeField] private Camera cam;
@@ -47,12 +51,20 @@ public class WallRun : MonoBehaviour
 
     void CheckWall()
     {
-        wallLeft = Physics.Raycast(transform.position, -orientation.right,out leftWallHit, wallDistance);
-        wallRight = Physics.Raycast(transform.position, orientation.right,out rightWallHit, wallDistance);
+        wallLeft = Physics.Raycast(transform.position, -orientation.right,out leftWallHit, wallDistance,wallMask);
+        wallRight = Physics.Raycast(transform.position, orientation.right,out rightWallHit, wallDistance,wallMask);
     }
 
     private void Update()
     {
+        if (currentlyWallrunning)
+        {
+            wallruns = true;
+        }
+        else
+        {
+            wallruns = false;
+        }
         CheckWall();
 
         if (CanWallRun())

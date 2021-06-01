@@ -20,10 +20,12 @@ public class PlayerMovementRb : MonoBehaviour
 
     [Header("Jumping")]
     public float jumpforce = 5f;
+    bool jumped;
 
     [Header("Drag")]
     [SerializeField] float groundDrag = 6f;
     [SerializeField] float airDrag = 2f;
+    [SerializeField] float WallDrag = 2f;
     [SerializeField] float gravity=14.0f;
     [SerializeField] float verticalVelocity;
     [SerializeField] Vector3 gravityMove;
@@ -47,6 +49,11 @@ public class PlayerMovementRb : MonoBehaviour
     Rigidbody rb;
     [SerializeField] WallRun wallRunScript;
     [SerializeField] WaterControl waterControlScript;
+    [SerializeField] Animator animator;
+
+    [Header("Animator")]
+    private int JumpHash = Animator.StringToHash("Jump");
+    private int MidAirHash = Animator.StringToHash("MidAir");
 
     RaycastHit slopeHit;
 
@@ -88,6 +95,28 @@ public class PlayerMovementRb : MonoBehaviour
         if (Input.GetButtonDown("Jump") && isGrounded )
         {
             Jump();
+            jumped = false;
+            animator.SetTrigger(JumpHash);
+            if (isGrounded)
+            {
+                animator.SetBool(MidAirHash, false);
+            }
+            else if (!isGrounded)
+            {
+                animator.SetBool(MidAirHash, true);
+            }
+        }
+        if (isGrounded)
+        {
+            if(jumped == true)
+            {
+                jumped = false;
+            }
+            animator.SetBool(MidAirHash, false);
+        }
+        else if (!isGrounded)
+        {
+            animator.SetBool(MidAirHash, true);
         }
 
         slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
@@ -110,9 +139,9 @@ public class PlayerMovementRb : MonoBehaviour
         }
         else
         { // Fall gravity capped
-            if (verticalVelocity < -gravity)
+            if (verticalVelocity < (2*-gravity))
             {
-                verticalVelocity = -gravity;
+                verticalVelocity = (2*-gravity);
             }
             else
             {
@@ -159,6 +188,10 @@ public class PlayerMovementRb : MonoBehaviour
         {
             rb.drag = groundDrag;
         }
+        else if(wallRunScript.currentlyWallrunning)
+        {
+            rb.drag = WallDrag;
+        } 
         else
         {
             rb.drag = airDrag;
@@ -172,7 +205,7 @@ public class PlayerMovementRb : MonoBehaviour
 
     void MovePlayer() //Moving the player
     {
-        if (isGrounded && !OnSlope())
+        if ((isGrounded && !OnSlope()) || wallRunScript.currentlyWallrunning)
         {
         rb.AddForce(moveDirection.normalized * moveSpeed *movementMultiplier, ForceMode.Acceleration);
 

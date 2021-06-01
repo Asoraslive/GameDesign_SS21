@@ -9,9 +9,13 @@ public class PlayerLook : MonoBehaviour
 
     [SerializeField] private float sensX = 100f;
     [SerializeField] private float sensY = 100f;
+    [SerializeField] float rotationSpeedCharacter;
+
 
     [SerializeField] Transform cam;
     [SerializeField] Transform orientation;
+    [SerializeField] Transform charmodel;
+
 
     float mouseX;
     float mouseY;
@@ -39,6 +43,9 @@ public class PlayerLook : MonoBehaviour
 
         cam.transform.localRotation = Quaternion.Euler(xRotation, yRotation, wallRun.tilt);
         orientation.transform.rotation = Quaternion.Euler(0, yRotation, 0);
+
+
+        charmodel.transform.rotation = Quaternion.RotateTowards(charmodel.transform.rotation, orientation.transform.rotation, rotationSpeedCharacter * Time.deltaTime);
     }
 
 }
