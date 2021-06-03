@@ -34,8 +34,8 @@ public class WallRun : MonoBehaviour
     bool wallLeft = false;
     bool wallRight = false;
 
-    RaycastHit leftWallHit;
-    RaycastHit rightWallHit;
+    public RaycastHit leftWallHit;
+    public RaycastHit rightWallHit;
 
     private Rigidbody rb;
 
@@ -66,8 +66,9 @@ public class WallRun : MonoBehaviour
             wallruns = false;
         }
         CheckWall();
-
-        if (CanWallRun())
+        Vector3 test = rb.velocity;
+        test.y = 0;
+        if (CanWallRun() &&  test.magnitude > 4f)
         {
             if (wallLeft)
             {
@@ -76,6 +77,10 @@ public class WallRun : MonoBehaviour
             else if (wallRight)
             {
                 StartWallRun();
+            }
+            else if (rb.velocity.magnitude < 4f)
+            {
+                StopWallRun();
             }
             else
             {

@@ -12,6 +12,7 @@ public class PlayerMovementRb : MonoBehaviour
     public float moveSpeed = 6f;
     float movementMultiplier = 10f;
     [SerializeField] float airMultiplier = 0.4f;
+    [SerializeField] float wallSpeed = 10f;
 
     [Header("Sprinting")]
     [SerializeField] float walkSpeed = 4f;
@@ -50,6 +51,8 @@ public class PlayerMovementRb : MonoBehaviour
     [SerializeField] WallRun wallRunScript;
     [SerializeField] WaterControl waterControlScript;
     [SerializeField] Animator animator;
+    [SerializeField] RaycastHit leftWallHit;
+    [SerializeField] RaycastHit rightWallHit;
 
     [Header("Animator")]
     private int JumpHash = Animator.StringToHash("Jump");
@@ -86,6 +89,9 @@ public class PlayerMovementRb : MonoBehaviour
 
     private void Update()
     {
+
+        leftWallHit = wallRunScript.leftWallHit;
+        rightWallHit = wallRunScript.rightWallHit;
         isGrounded = Physics.CheckSphere(groundCheck.position,groundDistance,groundMask);
         GravityHandler();
         MyInput();
@@ -205,7 +211,7 @@ public class PlayerMovementRb : MonoBehaviour
 
     void MovePlayer() //Moving the player
     {
-        if ((isGrounded && !OnSlope()) || wallRunScript.currentlyWallrunning)
+        if ((isGrounded && !OnSlope()))
         {
         rb.AddForce(moveDirection.normalized * moveSpeed *movementMultiplier, ForceMode.Acceleration);
 
@@ -213,6 +219,16 @@ public class PlayerMovementRb : MonoBehaviour
         else if (isGrounded && OnSlope())
         {
         rb.AddForce(slopeMoveDirection.normalized * moveSpeed * movementMultiplier, ForceMode.Acceleration);
+        } 
+        else if (wallRunScript.currentlyWallrunning)
+        {
+            //left wall dir
+
+
+            //rightwall dir
+
+            //move 
+        rb.AddForce(orientation.forward * wallSpeed * movementMultiplier, ForceMode.Acceleration);
         }
         else
         {
