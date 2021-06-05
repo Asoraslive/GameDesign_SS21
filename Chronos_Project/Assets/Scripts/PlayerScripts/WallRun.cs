@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class WallRun : MonoBehaviour
 {
+    [SerializeField] PlayerMovementRb moveScript;
+
     [Header("Movement")]
     [SerializeField] Transform orientation;
     [SerializeField] float minimumJumpHeight = 1.5f;
@@ -53,6 +55,7 @@ public class WallRun : MonoBehaviour
     {
         wallLeft = Physics.Raycast(transform.position, -orientation.right,out leftWallHit, wallDistance,wallMask);
         wallRight = Physics.Raycast(transform.position, orientation.right,out rightWallHit, wallDistance,wallMask);
+
     }
 
     private void Update()
@@ -68,7 +71,7 @@ public class WallRun : MonoBehaviour
         CheckWall();
         Vector3 test = rb.velocity;
         test.y = 0;
-        if (CanWallRun() &&  test.magnitude > 4f)
+        if (CanWallRun() &&  test.magnitude > 2f && !moveScript.isGrounded)
         {
             if (wallLeft)
             {

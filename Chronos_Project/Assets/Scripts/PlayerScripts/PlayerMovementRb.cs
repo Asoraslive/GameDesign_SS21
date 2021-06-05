@@ -37,7 +37,7 @@ public class PlayerMovementRb : MonoBehaviour
     [Header("Grounded")]
     [SerializeField] Transform groundCheck;
     [SerializeField] LayerMask groundMask;
-    [SerializeField] bool isGrounded;
+    [SerializeField] public bool isGrounded;
     float groundDistance = 0.4f;
 
     [Header("Keybinds")]
@@ -222,12 +222,7 @@ public class PlayerMovementRb : MonoBehaviour
         } 
         else if (wallRunScript.currentlyWallrunning)
         {
-            //left wall dir
-
-
-            //rightwall dir
-
-            //move 
+ 
         rb.AddForce(orientation.forward * wallSpeed * movementMultiplier, ForceMode.Acceleration);
         }
         else
