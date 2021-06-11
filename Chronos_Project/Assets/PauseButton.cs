@@ -13,8 +13,8 @@ public class PauseButton : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape)){
-            if (GameIsPaused) { Debug.Log("Resuming"); Resume(); }
-            else { Debug.Log("Pausing"); Pause(); }
+            if (GameIsPaused) { Resume(); }
+            else {  Pause(); }
 
         }
         if (confirmWindow.active)
@@ -38,7 +38,6 @@ public class PauseButton : MonoBehaviour
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
         GameIsPaused = true;
-        Debug.Log("paused");
 
     }
 
