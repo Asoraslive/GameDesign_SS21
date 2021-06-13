@@ -12,7 +12,6 @@ public class AnimationStateController : MonoBehaviour
     void Start()
     {
         _rb = GetComponent<Rigidbody>();
-        Debug.Log(_rb);
     }
 
     // Update is called once per frame
