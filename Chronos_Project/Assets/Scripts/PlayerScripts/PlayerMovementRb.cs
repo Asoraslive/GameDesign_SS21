@@ -89,43 +89,46 @@ public class PlayerMovementRb : MonoBehaviour
 
     private void Update()
     {
-
-        leftWallHit = wallRunScript.leftWallHit;
-        rightWallHit = wallRunScript.rightWallHit;
-        isGrounded = Physics.CheckSphere(groundCheck.position,groundDistance,groundMask);
-        GravityHandler();
-        MyInput();
-        ControlDrag();
-        ControlSpeed();
-
-        if (Input.GetButtonDown("Jump") && isGrounded )
+        if (!PauseButton.GameIsPaused)
         {
-            Jump();
-            jumped = false;
-            animator.SetTrigger(JumpHash);
+            leftWallHit = wallRunScript.leftWallHit;
+            rightWallHit = wallRunScript.rightWallHit;
+            isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+            GravityHandler();
+            MyInput();
+            ControlDrag();
+            ControlSpeed();
+
+            if (Input.GetButtonDown("Jump") && isGrounded)
+            {
+                Jump();
+                jumped = false;
+                animator.SetTrigger(JumpHash);
+                if (isGrounded)
+                {
+                    animator.SetBool(MidAirHash, false);
+                }
+                else if (!isGrounded)
+                {
+                    animator.SetBool(MidAirHash, true);
+                }
+            }
             if (isGrounded)
             {
+                if (jumped == true)
+                {
+                    jumped = false;
+                }
                 animator.SetBool(MidAirHash, false);
             }
             else if (!isGrounded)
             {
                 animator.SetBool(MidAirHash, true);
             }
-        }
-        if (isGrounded)
-        {
-            if(jumped == true)
-            {
-                jumped = false;
-            }
-            animator.SetBool(MidAirHash, false);
-        }
-        else if (!isGrounded)
-        {
-            animator.SetBool(MidAirHash, true);
+
+            slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
         }
 
-        slopeMoveDirection = Vector3.ProjectOnPlane(moveDirection, slopeHit.normal);
     }
 
     void GravityHandler()
