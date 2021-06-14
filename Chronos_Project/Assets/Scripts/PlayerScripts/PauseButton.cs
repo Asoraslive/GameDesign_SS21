@@ -9,12 +9,15 @@ public class PauseButton : MonoBehaviour
     public GameObject pauseMenuUI;
     public GameObject confirmWindow;
 
-
+    private void Start()
+    {
+        Resume();
+    }
     void Update()
     {
+
         if (Input.GetKeyDown(KeyCode.Escape)){
-            if (GameIsPaused) { Resume(); }
-            else {  Pause(); }
+            Pause();
 
         }
         if (confirmWindow.active)
@@ -33,21 +36,24 @@ public class PauseButton : MonoBehaviour
 
     public void Pause()
     {
+        GameIsPaused = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         pauseMenuUI.SetActive(true);
         Time.timeScale = 0f;
-        GameIsPaused = true;
+
+
 
     }
 
     public void Resume()
     {
+        GameIsPaused = false;
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         pauseMenuUI.SetActive(false);
         Time.timeScale = 1;
-        GameIsPaused = false;
+
     }
 
     //confirm to go back
@@ -70,4 +76,5 @@ public class PauseButton : MonoBehaviour
         confirmWindow.SetActive(false);
         pauseMenuUI.SetActive(true);
     }
+
 }
