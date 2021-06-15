@@ -18,28 +18,34 @@ public class Health : MonoBehaviour
         healthbar.SetMaxHealth(maxHealth);
     }
 
-    public void TakeDamage()
+    public bool TakeDamage()
     {
         currentHealth -= dmg;
         healthbar.updateHealth(currentHealth);
         if (currentHealth <= 0)
         {
             Die();
+            return true;
         }
+
+        return false;
     }
 
     public void Die()
     {
         transform.position = respawn.position;
+        Rigidbody _rb = GetComponent<Rigidbody>();
+        _rb.velocity = Vector3.zero;
         currentHealth = maxHealth;
         healthbar.updateHealth(maxHealth);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.collider.CompareTag("Respawn"))
+        Debug.Log(other);
+        if (other.CompareTag("Respawn"))
         {
-            respawn = collision.collider.transform;
+            respawn = other.transform;
         }
     }
 }

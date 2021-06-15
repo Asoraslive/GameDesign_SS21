@@ -4,28 +4,29 @@ using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
+
+    [Header("References")]
     private Transform target; //position des Targets
-    public float range = 15f;
     public GameObject player; //Sucht nach diesem Objekt
-
     public Transform head; //zum rotieren
-    public float turnSpeed = 25f;
-
     public Transform pointOfRay; // start des Raycasts
-
-    public float timeToFire = 180f;
-    private float aktTime;
-    public GameObject explosionEffect;
-
     public LineRenderer lr;
-
-    private Vector3 nullV = new Vector3(0,0,0);
-
+    public GameObject explosionEffect;
     public AudioSource aktivate;
-    private bool soundplayed = false;
 
+    [Header("Turret Specs")]
+    public float turnSpeed = 25f;
+    public float range = 15f;
+    public float timeToFire = 180f;
+
+    [Header("Explosion")]
     public float explosionradius = 1f;
+    public float explosionForce = 20f;
 
+    //Privates
+    private Vector3 nullV = new Vector3(0,0,0);
+    private bool soundplayed = false;
+    private float aktTime;
     private bool shot;
 
 
@@ -112,19 +113,32 @@ public class Turret : MonoBehaviour
         
         if(Physics.Raycast(pointOfRay.position, direction, out t, range))
         {
-            Instantiate(explosionEffect, t.point, t.transform.rotation);
+            GameObject explo = Instantiate(explosionEffect, t.point, t.transform.rotation);
+            ParticleSystem pSys = explo.GetComponent<ParticleSystem>();
+            float totalDuration = pSys.duration + pSys.startLifetime;
+            Destroy(explo, totalDuration);
+
             Collider[] hitCollider = Physics.OverlapSphere(t.transform.position, explosionradius);
             foreach (Collider c in hitCollider)
             {
                 if (c.CompareTag("Player"))
                 {
-                    c.GetComponent<Health>().TakeDamage();
+                    
+                    Rigidbody _rb = c.GetComponent<Rigidbody>();
+                    Vector3 pushForce = c.transform.position - t.point;
+                    Health h = c.GetComponent<Health>();
+
+                    if (!h.TakeDamage())
+                    {
+                        _rb.AddForce(pushForce.normalized * explosionForce, ForceMode.Impulse);
+                    }
                 }
 
             }
         }
         shot = false;
     }
+
 
     private void OnDrawGizmosSelected()
     {
