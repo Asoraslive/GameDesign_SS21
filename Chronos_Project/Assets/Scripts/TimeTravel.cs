@@ -16,6 +16,35 @@ public class TimeTravel : MonoBehaviour
     {
         time = false;
         children = GetComponentsInChildren<Transform>();
+        foreach (Transform child in children)
+        {
+            if (child.gameObject.tag == "Past")
+            {
+                if (time)
+                {
+                    child.gameObject.SetActive(true);
+                }
+                else
+                {
+                    child.gameObject.SetActive(false);
+                }
+            }
+            else if (child.gameObject.tag == "Present")
+            {
+                if (time)
+                {
+                    child.gameObject.SetActive(false);
+                }
+                else
+                {
+                    child.gameObject.SetActive(true);
+                }
+            }
+            else
+            {
+                Debug.Log(child.gameObject.name + "hat keine Zeit");
+            }
+        }
     }
     // Update is called once per frame
     void Update()
