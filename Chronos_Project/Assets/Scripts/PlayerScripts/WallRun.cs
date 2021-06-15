@@ -20,6 +20,7 @@ public class WallRun : MonoBehaviour
     [SerializeField] private float wallRunGravity;
     [SerializeField] private float wallRunJumpForce;
     [SerializeField] bool wallruns;
+    [SerializeField] float wallJumpRangeMultiplier = 2f;
     public bool currentlyWallrunning { get; set; }
 
 
@@ -115,9 +116,21 @@ public class WallRun : MonoBehaviour
 
         if (Input.GetButtonDown("Jump"))
         {
-            if (wallLeft)
+            if (wallLeft && Input.GetKey(KeyCode.D))
             {
-                Vector3 walljumpDirection = transform.up + leftWallHit.normal;
+                Vector3 walljumpDirection = transform.up + leftWallHit.normal * wallJumpRangeMultiplier;
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                rb.AddForce(walljumpDirection * wallRunJumpForce*100, ForceMode.Force);
+            }
+            else if (wallRight && Input.GetKey(KeyCode.A))
+            {
+                Vector3 walljumpDirection = transform.up + rightWallHit.normal* wallJumpRangeMultiplier;
+                rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
+                rb.AddForce(walljumpDirection * wallRunJumpForce*100, ForceMode.Force);
+            }
+            else if (wallLeft)
+            {
+                Vector3 walljumpDirection = transform.up + leftWallHit.normal ;
                 rb.velocity = new Vector3(rb.velocity.x, 0, rb.velocity.z);
                 rb.AddForce(walljumpDirection * wallRunJumpForce*100, ForceMode.Force);
             }

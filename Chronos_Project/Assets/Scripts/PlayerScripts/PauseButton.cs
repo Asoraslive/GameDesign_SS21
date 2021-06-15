@@ -16,7 +16,7 @@ public class PauseButton : MonoBehaviour
     void Update()
     {
 
-        if (Input.GetKeyDown(KeyCode.Escape)){
+        if (Input.GetKeyDown(KeyCode.Escape) && !pauseMenuUI.active && !confirmWindow.active){
             Pause();
 
         }
@@ -28,14 +28,27 @@ public class PauseButton : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.N))
             {
+                Debug.Log("Canceled");
                 cancelBack();
             }
            
+        }
+        else if (pauseMenuUI.active)
+        {
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                Resume();
+            }
+            if (Input.GetKeyDown(KeyCode.N))
+            {
+                BackToMenu();
+            }
         }
     }
 
     public void Pause()
     {
+        Debug.Log("Pasued");
         GameIsPaused = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
@@ -73,8 +86,13 @@ public class PauseButton : MonoBehaviour
     //cancel inside Confirm window
     public void cancelBack()
     {
+        Debug.Log("cancelBack");
         confirmWindow.SetActive(false);
         pauseMenuUI.SetActive(true);
     }
 
+    public void buttonPress()
+    {
+        Debug.Log("Button Pressed");
+    }
 }
