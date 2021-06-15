@@ -31,7 +31,7 @@ public class Turret : MonoBehaviour
     void Start()
     {
         aktTime = timeToFire;
-        InvokeRepeating("UpdateTarget", 0f, 0.5f); //sucht nach dem Spieler jede 0.5 Sekunde
+        InvokeRepeating("UpdateTarget", 0f, 0.5f); //sucht nach dem Spieler jede 0.5 Sekunden
     }
 
     void UpdateTarget ()
@@ -53,7 +53,7 @@ public class Turret : MonoBehaviour
         if (target == null)
         {
             soundplayed = false;
-            lr.SetPosition(1, nullV);
+            lr.SetPosition(1, nullV);//schaltet den laser aus
             aktTime = timeToFire;
             return;
         }
