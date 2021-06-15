@@ -48,7 +48,6 @@ public class PauseButton : MonoBehaviour
 
     public void Pause()
     {
-        Debug.Log("Pasued");
         GameIsPaused = true;
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;

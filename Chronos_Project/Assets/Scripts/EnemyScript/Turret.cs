@@ -50,45 +50,63 @@ public class Turret : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (target == null)
+        if (!PauseButton.GameIsPaused)
         {
-            soundplayed = false;
-            lr.SetPosition(1, nullV);//schaltet den laser aus
-            aktTime = timeToFire;
-            return;
-        }
-
-        //Rotiert den Kopf
-        Vector3 dir = target.position - pointOfRay.position;
-        Quaternion lookRotation = Quaternion.LookRotation(dir);
-        Vector3 rotation = Quaternion.Lerp(head.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
-        head.rotation = Quaternion.Euler(0f, rotation.y, 0f);
-
-        //Wenn der Spieler anvisiert ist, wird der Timer runtergezählt. Wenn der Spieler nicht mehr anvisiert ist, resettet der Timer. Wenn der Timer abgelaufen ist feuert der Turm
-        RaycastHit hit; 
-        if (Physics.Raycast(pointOfRay.position, dir, out hit, range))
-        {
-            if (hit.transform.name == player.transform.name)
+            if (target == null)
             {
-                aktivate.Play();
-                soundplayed = true;
-                lr.SetPosition(1, hit.transform.position);
-                aktTime--;
-                if (aktTime == 0)
+                soundplayed = false;
+                lr.SetPosition(1, nullV);//schaltet den laser aus
+                aktTime = timeToFire;
+                return;
+            }
+
+            //Rotiert den Kopf
+            Vector3 dir = target.position - pointOfRay.position;
+            Quaternion lookRotation = Quaternion.LookRotation(dir);
+            Vector3 rotation = Quaternion.Lerp(head.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
+            head.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+
+            //Wenn der Spieler anvisiert ist, wird der Timer runtergezählt. Wenn der Spieler nicht mehr anvisiert ist, resettet der Timer. Wenn der Timer abgelaufen ist feuert der Turm
+            RaycastHit hit;
+            //Hit -> follow while (inRange)
+            if (Physics.Raycast(pointOfRay.position, dir, out hit, range))
+            {
+                if (hit.transform.name == player.transform.name)
                 {
+                    aktivate.Play();
+                    soundplayed = true;
+                    lr.SetPosition(1, hit.transform.position);
+                    aktTime--;
+                    if (aktTime > 100 && aktTime < 150)
+                    {
+                        aktivate.pitch = 2;
+                    }
+                    else if (aktTime > 10 && aktTime < 60)
+                    {
+                        aktivate.pitch = 2;
+                    }
+                    else if (aktTime == 0)
+                    {
+                        aktTime = timeToFire;
+
+                        hit.transform.GetComponent<Health>().TakeDamage();
+
+                        Instantiate(explosionEffect, hit.transform.position, hit.transform.rotation);
+                        aktivate.pitch = 1;
+                    }
+                    else
+                    {
+                        aktivate.pitch = 1;
+                    }
+                }
+                else
+                {
+                    lr.SetPosition(1, nullV);
                     aktTime = timeToFire;
-
-                    hit.transform.GetComponent<Health>().TakeDamage(damage);
-
-                    Instantiate(explosionEffect, hit.transform.position, hit.transform.rotation);
                 }
             }
-            else
-            {
-                lr.SetPosition(1, nullV);
-                aktTime = timeToFire; 
-            }
         }
+
     }
 
     private void OnDrawGizmosSelected()
