@@ -15,9 +15,6 @@ public class Turret : MonoBehaviour
 
     public float timeToFire = 180f;
     private float aktTime;
-
-    public float damage = 50f;
-
     public GameObject explosionEffect;
 
     public LineRenderer lr;
@@ -54,7 +51,7 @@ public class Turret : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (target == null)
         {
@@ -67,10 +64,11 @@ public class Turret : MonoBehaviour
         {
             lr.SetColors(Color.green, Color.green);
             //Rotiert den Kopf
-            Vector3 dir = target.position - pointOfRay.position;
+            Vector3 dir = getTarget();
             Quaternion lookRotation = Quaternion.LookRotation(dir);
             Vector3 rotation = Quaternion.Lerp(head.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
             head.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+            Debug.DrawRay(pointOfRay.position, dir, Color.cyan);
             //Wenn der Spieler anvisiert ist, wird der Timer runtergezählt. Wenn der Spieler nicht mehr anvisiert ist, resettet der Timer. Wenn der Timer abgelaufen ist feuert der Turm
             RaycastHit hit;
             if (Physics.Raycast(pointOfRay.position, dir, out hit, range))
@@ -86,7 +84,7 @@ public class Turret : MonoBehaviour
                         aktTime = timeToFire;
                         shot = true;
                         
-                        StartCoroutine(Shoot());
+                        StartCoroutine(Shoot(getTarget()));
                         lr.SetColors(Color.red, Color.red);
                     }
                 }
@@ -102,21 +100,25 @@ public class Turret : MonoBehaviour
         }
     }
 
-    IEnumerator Shoot ()
+    private Vector3 getTarget()
     {
-        Vector3 direction = target.position - pointOfRay.position;
-        yield return new WaitForSeconds(0.2f);
+        return target.position - pointOfRay.position;
+    }
+
+    IEnumerator Shoot (Vector3 direction)
+    {
+        yield return new WaitForSeconds(0.05f);
         RaycastHit t;
-        Physics.Raycast(pointOfRay.position, target.position, out t, range);
-        if(t.transform != null)
+        
+        if(Physics.Raycast(pointOfRay.position, direction, out t, range))
         {
-            Instantiate(explosionEffect, t.transform.position, t.transform.rotation);
+            Instantiate(explosionEffect, t.point, t.transform.rotation);
             Collider[] hitCollider = Physics.OverlapSphere(t.transform.position, explosionradius);
             foreach (Collider c in hitCollider)
             {
                 if (c.CompareTag("Player"))
                 {
-                    c.GetComponent<Health>().TakeDamage(damage);
+                    c.GetComponent<Health>().TakeDamage();
                 }
 
             }

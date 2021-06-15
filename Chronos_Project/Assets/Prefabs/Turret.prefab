@@ -324,11 +324,12 @@ MonoBehaviour:
   head: {fileID: 1302346943668792427}
   turnSpeed: 15
   pointOfRay: {fileID: 1302346945058567996}
-  timeToFire: 400
+  timeToFire: 250
   damage: 50
   explosionEffect: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
   lr: {fileID: 1302346945065630673}
   aktivate: {fileID: 2479434668850650965}
+  explosionradius: 3
 --- !u!82 &2479434668850650965
 AudioSource:
   m_ObjectHideFlags: 0
