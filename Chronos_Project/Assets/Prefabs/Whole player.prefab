@@ -635,7 +635,7 @@ GameObject:
   - component: {fileID: 885913670280724998}
   - component: {fileID: 885913670280724999}
   - component: {fileID: 885913670280724992}
-  - component: {fileID: 885913670280725001}
+  - component: {fileID: 5060705238870455444}
   m_Layer: 10
   m_Name: Player
   m_TagString: Player
@@ -752,6 +752,7 @@ MonoBehaviour:
   wallRunGravity: 1
   wallRunJumpForce: 6
   wallruns: 0
+  wallJumpRangeMultiplier: 2
   cam: {fileID: 885913670045454023}
   fov: 90
   wallRunfov: 110
@@ -801,7 +802,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 885913671035070763}
   _rb: {fileID: 0}
---- !u!114 &885913670280725001
+--- !u!114 &5060705238870455444
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -810,10 +811,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 885913670280724994}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 309f58b5492eb0f469d8d07f62894cd7, type: 3}
+  m_Script: {fileID: 11500000, guid: 9fff26a1ae8620745b7f904f12bc6d53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthbar: {fileID: 0}
+  respawn: {fileID: 0}
 --- !u!1 &885913670299519999
 GameObject:
   m_ObjectHideFlags: 0

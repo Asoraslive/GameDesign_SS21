@@ -57,6 +57,7 @@ public class PlayerMovementRb : MonoBehaviour
     [Header("Animator")]
     private int JumpHash = Animator.StringToHash("Jump");
     private int MidAirHash = Animator.StringToHash("MidAir");
+    private int LandingHash = Animator.StringToHash("Landing");
 
     RaycastHit slopeHit;
 
