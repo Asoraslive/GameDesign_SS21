@@ -13,6 +13,7 @@ public class Turret : MonoBehaviour
     public LineRenderer lr;
     public GameObject explosionEffect;
     public AudioSource aktivate;
+    public AudioClip explosionsfx;
 
     [Header("Turret Specs")]
     public float turnSpeed = 25f;
@@ -113,6 +114,7 @@ public class Turret : MonoBehaviour
         
         if(Physics.Raycast(pointOfRay.position, direction, out t, range))
         {
+            AudioSource.PlayClipAtPoint(explosionsfx, t.point);
             GameObject explo = Instantiate(explosionEffect, t.point, t.transform.rotation);
             ParticleSystem pSys = explo.GetComponent<ParticleSystem>();
             float totalDuration = pSys.duration + pSys.startLifetime;
