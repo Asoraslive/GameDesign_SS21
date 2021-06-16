@@ -6,6 +6,9 @@ TagManager:
   tags:
   - Wall
   - Water
+  - Present
+  - Past
+  - Deathbox
   layers:
   - Default
   - TransparentFX
