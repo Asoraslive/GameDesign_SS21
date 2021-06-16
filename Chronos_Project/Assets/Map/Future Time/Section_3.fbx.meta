@@ -3,7 +3,22 @@ guid: 62d076a5e1625984796400ae6ba89bff
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Glass
+    second: {fileID: 2100000, guid: 0fcc21f752454824a81a2a1623147ad7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Light_bar
+    second: {fileID: 2100000, guid: 96a8b7cf7e31a0441becefcc1c67f319, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: "Wei\xDF"
+    second: {fileID: 2100000, guid: 86e51cf0735b07147b5edceea8528258, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
