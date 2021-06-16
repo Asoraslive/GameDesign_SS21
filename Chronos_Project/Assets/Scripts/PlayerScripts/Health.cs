@@ -21,7 +21,7 @@ public class Health : MonoBehaviour
     public bool TakeDamage()
     {
         currentHealth -= dmg;
-        healthbar.updateHealth(currentHealth);
+        //healthbar.updateHealth(currentHealth);
         if (currentHealth <= 0)
         {
             Die();
