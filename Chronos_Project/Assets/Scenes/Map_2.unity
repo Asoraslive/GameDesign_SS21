@@ -1096,6 +1096,7 @@ GameObject:
   m_Component:
   - component: {fileID: 480702200}
   - component: {fileID: 480702201}
+  - component: {fileID: 480702202}
   m_Layer: 0
   m_Name: Map
   m_TagString: Untagged
@@ -1133,6 +1134,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d642df82aa54084184ec04f2efb60ca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  flashplayer: {fileID: 618653198}
+--- !u!65 &480702202
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 480702199}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 67.53, y: 142.8, z: 106.2}
+  m_Center: {x: 171.6, y: 257.8, z: 380.06}
 --- !u!1 &492349931 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: -8383124558419344257, guid: f7bce721a5381ae4fbc40f43b733b0bf, type: 3}
@@ -1205,6 +1220,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.011124229, y: 0.011124227, z: 0.0058431337}
   m_Center: {x: -0.00000010221265, y: 0, z: 0.000065324}
+--- !u!1 &618653198 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4503256109447618859, guid: 43eaa23d658b6da458e671923a8a0f62, type: 3}
+  m_PrefabInstance: {fileID: 1968087820}
+  m_PrefabAsset: {fileID: 0}
 --- !u!20 &629618942 stripped
 Camera:
   m_CorrespondingSourceObject: {fileID: 885913670045454023, guid: 802d6709e52593048bcbf3a196719471, type: 3}
