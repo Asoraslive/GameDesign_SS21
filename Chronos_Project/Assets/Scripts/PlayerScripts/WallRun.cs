@@ -54,7 +54,10 @@ public class WallRun : MonoBehaviour
 
     void CheckWall()
     {
-        wallLeft = Physics.Raycast(transform.position, -orientation.right,out leftWallHit, wallDistance,wallMask);
+
+
+
+        wallLeft = Physics.Raycast(transform.position, -orientation.right, out leftWallHit, wallDistance, wallMask);
         wallRight = Physics.Raycast(transform.position, orientation.right,out rightWallHit, wallDistance,wallMask);
 
     }
@@ -74,11 +77,11 @@ public class WallRun : MonoBehaviour
         test.y = 0;
         if (CanWallRun() &&  test.magnitude > 2f && !moveScript.isGrounded)
         {
-            if (wallLeft)
+            if (Physics.Raycast(transform.position, -orientation.right, out leftWallHit, wallDistance, wallMask) || Physics.Raycast(transform.position, (-orientation.right + (orientation.forward*2)), out leftWallHit, wallDistance, wallMask) || Physics.Raycast(transform.position, (-orientation.right - (orientation.forward*2)), out leftWallHit, wallDistance, wallMask))
             {
                 StartWallRun();
             }
-            else if (wallRight)
+            else if (Physics.Raycast(transform.position, orientation.right, out leftWallHit, wallDistance, wallMask) || Physics.Raycast(transform.position, ((orientation.right + orientation.forward * 2)), out leftWallHit, wallDistance, wallMask) || Physics.Raycast(transform.position, (orientation.right - (orientation.forward * 2)), out leftWallHit, wallDistance, wallMask))
             {
                 StartWallRun();
             }
