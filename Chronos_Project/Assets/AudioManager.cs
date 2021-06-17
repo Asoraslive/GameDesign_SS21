@@ -10,18 +10,18 @@ public class AudioManager : MonoBehaviour
 
     private void takeAStep()
     {
-        source.volume = .5f;
+        source.volume = .1f;
         source.PlayOneShot(clips[0]);
     }
 
     private void runAStep()
     {
-        source.volume = .8f;
+        source.volume = .15f;
         source.PlayOneShot(clips[1]);
     } 
     private void jumpUp()
     {
-        source.volume = 1f;
+        source.volume = .3f;
         source.PlayOneShot(clips[2]);
     }
 
