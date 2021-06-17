@@ -7,10 +7,13 @@ public class TimeTravel : MonoBehaviour
     //nimmt sich alle Children von Environment und setzt sie je nach Zeit auf Active
     //jedes Child von Environment braucht entweder Past oder Present Tag um Zeit zu wechseln
 
+    public GameObject flashplayer;
+
     private bool time; //true = past, false = present
     private Transform[] children; //alle children des Objects
 
     private bool traveled = false;
+    private bool blocked = true;
 
     private void Start()
     {
@@ -49,7 +52,7 @@ public class TimeTravel : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(1) && !traveled) //rechtsklick ändert die Zeit
+        if (Input.GetMouseButtonDown(1) && !traveled && !blocked) //rechtsklick ändert die Zeit
         {
             StartCoroutine("Travel");
         }
@@ -58,6 +61,8 @@ public class TimeTravel : MonoBehaviour
     IEnumerator Travel() // Coroutine für cooldown
     {
         traveled = true;
+
+        flashplayer.GetComponent<PlayTimeFlash>().Flash();
 
         time = !time;
         foreach (Transform child in children)
@@ -92,5 +97,14 @@ public class TimeTravel : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         traveled = false;
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            blocked = false;
+            StartCoroutine("Travel");
+        }
     }
 }
