@@ -690,10 +690,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   orientation: {fileID: 885913670191652878}
-  source: {fileID: 4500408806747134301}
-  clips:
-  - {fileID: 8300000, guid: 7ca5a9710db4327439c9f8cb8204615e, type: 3}
-  - {fileID: 8300000, guid: ffa5441258224694690169f4bd95b969, type: 3}
   moveSpeed: 3
   airMultiplier: 0.3
   wallSpeed: 13
@@ -1707,6 +1703,7 @@ GameObject:
   m_Component:
   - component: {fileID: 885913671035070756}
   - component: {fileID: 885913671035070763}
+  - component: {fileID: 1897151783450482004}
   m_Layer: 0
   m_Name: LowpolyNinjav1.1
   m_TagString: Untagged
@@ -1749,6 +1746,23 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1897151783450482004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885913671035070757}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14e3c2950a331a64ca2920c7e155402b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  source: {fileID: 4500408806747134301}
+  clips:
+  - {fileID: 8300000, guid: b995bc1775ea83b4b8f861763e9a1424, type: 3}
+  - {fileID: 8300000, guid: 5a5fe2a543e35ef44980fcf5ac79551a, type: 3}
+  - {fileID: 8300000, guid: 304f2bf2228cba94e91cd22803e54bcf, type: 3}
 --- !u!1 &885913671092530230
 GameObject:
   m_ObjectHideFlags: 0
