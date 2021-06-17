@@ -215,6 +215,7 @@ public class PlayerMovementRb : MonoBehaviour
 
     void MovePlayer() //Moving the player
     {
+
         if ((isGrounded && !OnSlope()))
         {
         rb.AddForce(moveDirection.normalized * moveSpeed *movementMultiplier, ForceMode.Acceleration);
