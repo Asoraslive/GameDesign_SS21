@@ -319,17 +319,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 257c74d4293657642b0f90e8de5decd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 15
   player: {fileID: 0}
   head: {fileID: 1302346943668792427}
-  turnSpeed: 15
   pointOfRay: {fileID: 1302346945058567996}
-  timeToFire: 250
-  damage: 50
-  explosionEffect: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
   lr: {fileID: 1302346945065630673}
+  explosionEffect: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
   aktivate: {fileID: 2479434668850650965}
+  explosionsfx: {fileID: 8300000, guid: c401d00c96b512e488d2e3bf5d111509, type: 3}
+  turnSpeed: 15
+  range: 15
+  timeToFire: 250
   explosionradius: 3
+  explosionForce: 20
 --- !u!82 &2479434668850650965
 AudioSource:
   m_ObjectHideFlags: 0
