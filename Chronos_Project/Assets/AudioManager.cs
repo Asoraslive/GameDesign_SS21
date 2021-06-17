@@ -18,6 +18,11 @@ public class AudioManager : MonoBehaviour
     {
         source.volume = .8f;
         source.PlayOneShot(clips[1]);
+    } 
+    private void jumpUp()
+    {
+        source.volume = 1f;
+        source.PlayOneShot(clips[2]);
     }
 
 }
