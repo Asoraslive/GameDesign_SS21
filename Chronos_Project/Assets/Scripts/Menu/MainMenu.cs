@@ -5,8 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    public AudioSource source;
-    public AudioClip click;
 
     private void Start()
     {
@@ -16,16 +14,21 @@ public class MainMenu : MonoBehaviour
 
     public void PlayGame()
     {
-        source.PlayOneShot(click);
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);
-        
-        
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex +1);        
     }
 
     public void QuitGame()
     {
-        source.PlayOneShot(click);
-
         Application.Quit();
+    }
+
+    public void LoadSettings()
+    {
+
+    }
+
+    public void LoadCredits()
+    {
+        SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings-1);
     }
 }
