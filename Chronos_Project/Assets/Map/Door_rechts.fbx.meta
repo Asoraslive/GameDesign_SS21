@@ -1,19 +1,9 @@
 fileFormatVersion: 2
-guid: e93052caa875e7b45a5a01792a71f731
+guid: 4b912b023996790448b09e307eae0e7a
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Light_bar
-    second: {fileID: 2100000, guid: 96a8b7cf7e31a0441becefcc1c67f319, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Metal
-    second: {fileID: 2100000, guid: ddc07094336185f4a8774837f588925c, type: 2}
+  externalObjects: {}
   materials:
     materialImportMode: 2
     materialName: 0
