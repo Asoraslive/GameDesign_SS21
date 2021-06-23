@@ -22,11 +22,6 @@ public class MainMenu : MonoBehaviour
         Application.Quit();
     }
 
-    public void LoadSettings()
-    {
-
-    }
-
     public void LoadCredits()
     {
         SceneManager.LoadScene(SceneManager.sceneCountInBuildSettings-1);
