@@ -19,6 +19,9 @@ public class Turret : MonoBehaviour
     public float turnSpeed = 25f;
     public float range = 15f;
     public float timeToFire = 180f;
+    public bool rndTimeToFire = false;
+    public float minRandomTTF = 80f;
+    public float maxRandomTTF = 150f;
 
     [Header("Explosion")]
     public float explosionradius = 1f;
@@ -35,7 +38,15 @@ public class Turret : MonoBehaviour
     void Start()
     {
         shot = false;
+        if (rndTimeToFire)
+        {
+            aktTime = Random.Range(80f, 150f);
+        }
+        else
+        {
         aktTime = timeToFire;
+        }
+
         InvokeRepeating("UpdateTarget", 0f, 0.5f); //sucht nach dem Spieler jede 0.5 Sekunden
     }
 
