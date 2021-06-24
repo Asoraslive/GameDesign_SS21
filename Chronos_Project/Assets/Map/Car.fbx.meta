@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 331f0f80458ce9b41be7f049c83ab55c
+guid: 692cf7cd0cd51f24697f4cc14dec8f32
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,18 +7,23 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Light_bar
-    second: {fileID: 2100000, guid: 96a8b7cf7e31a0441becefcc1c67f319, type: 2}
+      name: Car_Windows
+    second: {fileID: 2100000, guid: 78a2cd3ef01a3364fb044faa3fd004d1, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Main
-    second: {fileID: 2100000, guid: 86e51cf0735b07147b5edceea8528258, type: 2}
+      name: Car_lights_back
+    second: {fileID: 2100000, guid: 3606628efafdb2c4ca7da9db4ec2fb7a, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Metal
-    second: {fileID: 2100000, guid: ddc07094336185f4a8774837f588925c, type: 2}
+      name: Car_lights_front
+    second: {fileID: 2100000, guid: 9819d15016f8310489d1e8db8cae711a, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Car_main
+    second: {fileID: 2100000, guid: 2807b6f8aaa2e264da1e5496f4d2d20f, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

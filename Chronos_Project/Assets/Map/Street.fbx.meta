@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 331f0f80458ce9b41be7f049c83ab55c
+guid: 7b656c74412a0614d9134cd813d54078
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,18 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Light_bar
-    second: {fileID: 2100000, guid: 96a8b7cf7e31a0441becefcc1c67f319, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Main
-    second: {fileID: 2100000, guid: 86e51cf0735b07147b5edceea8528258, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Metal
-    second: {fileID: 2100000, guid: ddc07094336185f4a8774837f588925c, type: 2}
+      name: Street_light_bar
+    second: {fileID: 2100000, guid: f0c415faca69ebf43b9f1f53ad8c46b2, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
