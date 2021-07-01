@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Wall
+  - Water
+  - Present
+  - Past
+  - Deathbox
   layers:
   - Default
   - TransparentFX
@@ -11,11 +16,11 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
+  - Wall
+  - Ground
   - PostProcessing
   - Not in Reflection
-  - 
+  - DontShowInCam
   - 
   - 
   - 
