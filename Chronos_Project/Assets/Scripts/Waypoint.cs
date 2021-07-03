@@ -50,12 +50,8 @@ public class Waypoint : MonoBehaviour
         
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void NextWaypoint(int point)
     {
-        Debug.Log("hier");
-        if (other.CompareTag("Player"))
-        {
-            i++;
-        }
+        i = point;
     }
 }

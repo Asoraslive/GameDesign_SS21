@@ -9,10 +9,12 @@ public class PlayTimeFlash : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetMouseButtonDown(1) && !played)
-        {
-            StartCoroutine(PlayAnimationFlash());
-        }
+
+    }
+
+    public void Flash()
+    {
+        StartCoroutine(PlayAnimationFlash());
     }
 
     IEnumerator PlayAnimationFlash ()

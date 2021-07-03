@@ -47,5 +47,9 @@ public class Health : MonoBehaviour
         {
             respawn = other.transform;
         }
+        if (other.CompareTag("Deathbox"))
+        {
+            Die();
+        }
     }
 }

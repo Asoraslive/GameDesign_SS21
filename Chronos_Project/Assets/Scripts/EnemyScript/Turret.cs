@@ -10,7 +10,7 @@ public class Turret : MonoBehaviour
     public GameObject player; //Sucht nach diesem Objekt
     public Transform head; //zum rotieren
     public Transform pointOfRay; // start des Raycasts
-    public LineRenderer lr;
+    //public LineRenderer lr;
     public GameObject explosionEffect;
     public AudioSource aktivate;
     public AudioClip explosionsfx;
@@ -19,6 +19,9 @@ public class Turret : MonoBehaviour
     public float turnSpeed = 25f;
     public float range = 15f;
     public float timeToFire = 180f;
+    public bool rndTimeToFire = false;
+    public float minRandomTTF = 80f;
+    public float maxRandomTTF = 150f;
 
     [Header("Explosion")]
     public float explosionradius = 1f;
@@ -35,7 +38,15 @@ public class Turret : MonoBehaviour
     void Start()
     {
         shot = false;
+        if (rndTimeToFire)
+        {
+            aktTime = Random.Range(80f, 150f);
+        }
+        else
+        {
         aktTime = timeToFire;
+        }
+
         InvokeRepeating("UpdateTarget", 0f, 0.5f); //sucht nach dem Spieler jede 0.5 Sekunden
     }
 
@@ -58,13 +69,13 @@ public class Turret : MonoBehaviour
         if (target == null)
         {
             soundplayed = false;
-            lr.SetPosition(1, nullV);//schaltet den laser aus
+            //lr.SetPosition(1, nullV);//schaltet den laser aus
             aktTime = timeToFire;
         }
 
         else if(!shot)
         {
-            lr.SetColors(Color.green, Color.green);
+            //lr.SetColors(Color.green, Color.green);
             //Rotiert den Kopf
             Vector3 dir = getTarget();
             Quaternion lookRotation = Quaternion.LookRotation(dir);
@@ -79,7 +90,7 @@ public class Turret : MonoBehaviour
                 {
                     aktivate.Play();
                     soundplayed = true;
-                    lr.SetPosition(1, hit.transform.position);
+                    //lr.SetPosition(1, hit.transform.position);
                     aktTime--;
                     if (aktTime == 0)
                     {
@@ -87,12 +98,12 @@ public class Turret : MonoBehaviour
                         shot = true;
                         
                         StartCoroutine(Shoot(getTarget()));
-                        lr.SetColors(Color.red, Color.red);
+                        //lr.SetColors(Color.red, Color.red);
                     }
                 }
                 else
                 {
-                    lr.SetPosition(1, nullV);
+                    //lr.SetPosition(1, nullV);
                     aktTime = timeToFire;
                 }
             }
