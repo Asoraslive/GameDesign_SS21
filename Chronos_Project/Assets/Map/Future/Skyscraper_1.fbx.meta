@@ -45,6 +45,11 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Metal_dark
+    second: {fileID: 2100000, guid: ea9f5c16be1252a4cbcb21cc0438184c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Screen
     second: {fileID: 2100000, guid: 5edb1f40d6a230f43b8be3e3dc0e5c2f, type: 2}
   - first:

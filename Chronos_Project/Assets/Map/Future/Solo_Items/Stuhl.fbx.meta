@@ -21,7 +21,17 @@ ModelImporter:
   - first:
       74: -8939328191382026442
     second: Plane.178|Plane.178Action
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brown Fabric
+    second: {fileID: 2100000, guid: 031e981bdc9c18e4cb6951a349a079e3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Metal
+    second: {fileID: 2100000, guid: ddc07094336185f4a8774837f588925c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
