@@ -235,13 +235,13 @@ MonoBehaviour:
   m_AdvancedMode: 0
   quality:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 2
   enabled:
     m_OverrideState: 1
     m_Value: 1
   usedAlgorithm:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 0
   rayTracing:
     m_OverrideState: 0
     m_Value: 0
@@ -250,12 +250,12 @@ MonoBehaviour:
     m_Value: 1
   depthBufferThickness:
     m_OverrideState: 1
-    m_Value: 0.001
+    m_Value: 1
     min: 0
     max: 1
   screenFadeDistance:
-    m_OverrideState: 0
-    m_Value: 0.1
+    m_OverrideState: 1
+    m_Value: 0.137
     min: 0
     max: 1
   accumulationFactor:
@@ -282,18 +282,18 @@ MonoBehaviour:
     min: 1
     max: 31
   m_MinSmoothness:
-    m_OverrideState: 0
-    m_Value: 0.914
+    m_OverrideState: 1
+    m_Value: 0.495
     min: 0
     max: 1
   m_SmoothnessFadeStart:
-    m_OverrideState: 0
-    m_Value: 1
+    m_OverrideState: 1
+    m_Value: 0.66
     min: 0
     max: 1
   m_RayMaxIterations:
     m_OverrideState: 1
-    m_Value: 92
+    m_Value: 48
   m_RayLength:
     m_OverrideState: 0
     m_Value: 50
