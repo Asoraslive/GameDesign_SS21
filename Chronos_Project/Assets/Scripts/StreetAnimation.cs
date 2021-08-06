@@ -25,6 +25,7 @@ public class StreetAnimation : MonoBehaviour {
     private float starttime;
 
     void Start() {
+        //points = GetComponentsInChildren<Transform>();
         direction = points[1].transform.position - points[0].transform.position;
         car.transform.position = points[0].transform.position;
         car.transform.eulerAngles = convert_Vector_Quaternion(direction);
@@ -32,7 +33,6 @@ public class StreetAnimation : MonoBehaviour {
             active = false;
             starttime = Time.fixedTime;
         }
-        drawLines();
     }
 
 
@@ -66,12 +66,6 @@ public class StreetAnimation : MonoBehaviour {
             if (Time.fixedTime > starttime + waitseconds) {
                 active = true;
             }
-        }
-    }
-
-    void drawLines() {
-        for (int i = 0; i < points.Length - 1; i++) {
-            Gizmos.DrawLine(points[i].transform.position, points[i+1].transform.position);
         }
     }
 
