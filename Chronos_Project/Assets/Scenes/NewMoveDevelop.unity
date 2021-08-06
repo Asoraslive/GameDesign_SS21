@@ -4471,6 +4471,8 @@ MonoBehaviour:
   wallDrag: 0.1
   WallrunUpforce: 0.8
   WallrunUpforce_DecreaseRate: 0.5
+  godModeUpForce: 3
+  godModeDownForce: 200
 --- !u!54 &1345508394
 Rigidbody:
   m_ObjectHideFlags: 0

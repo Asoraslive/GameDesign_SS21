@@ -58,7 +58,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float WallrunUpforce_DecreaseRate;
     private float upforce;
 
-
+    [Header("Godmode Parameters")]
+    [SerializeField] float godModeUpForce = 10f;
+    [SerializeField] float godModeDownForce = 10f;
 
 
 
@@ -85,6 +87,7 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(!godMode)
         checkAllColliders();
 
         //Handle Drag
@@ -102,7 +105,8 @@ public class PlayerController : MonoBehaviour
         RotatePlayer();
 
 
-
+        if (Input.GetKeyDown(KeyCode.G)) { godMode = !godMode; if (godMode == true) { gravity = false; } else gravity = true; }
+        GodMode();
         if (!isWallRunning) movePlayer(moveDir);
         else if (isWallRunning) RunWall();
         
@@ -122,6 +126,7 @@ public class PlayerController : MonoBehaviour
     /*Move rb according to moev Dir*/
     public void movePlayer(Vector3 dir) 
     {
+
         //gravity
         if(gravity == true)
         {
@@ -341,6 +346,31 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(3f);
         wallrunCdCRActive = false;
         stopWallrun();
+        
+    }
+
+
+
+
+
+
+    private bool godMode = false;
+
+    /* GOD MODE*/
+    private void GodMode()
+    {
+        if (godMode == true)
+        {
+
+            if (Input.GetKey(KeyCode.Space))
+            {
+                rbPlayer.AddForce(Vector3.up * Time.deltaTime*godModeUpForce);
+            }
+            if  (Input.GetKey(KeyCode.V))
+            {
+                rbPlayer.AddForce(Vector3.down * Time.deltaTime*godModeDownForce);
+            }
+        }
         
     }
 }
