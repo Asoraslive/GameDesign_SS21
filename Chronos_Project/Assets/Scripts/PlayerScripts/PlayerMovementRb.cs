@@ -59,6 +59,7 @@ public class PlayerMovementRb : MonoBehaviour
     private int MidAirHash = Animator.StringToHash("MidAir");
     private int LandingHash = Animator.StringToHash("Landing");
 
+    public bool slope = false;
     RaycastHit slopeHit;
 
     //slope Detection
@@ -68,15 +69,18 @@ public class PlayerMovementRb : MonoBehaviour
         {
             if (slopeHit.normal != Vector3.up)
             {
+                slope = true;
                 return true;
             }
             else
             {
+                slope = false;
                 return false;
             }
         }
         else
         {
+            slope = false;
             return false;
         }
     }
@@ -95,9 +99,7 @@ public class PlayerMovementRb : MonoBehaviour
             leftWallHit = wallRunScript.leftWallHit;
             rightWallHit = wallRunScript.rightWallHit;
             isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
-            GravityHandler();
             MyInput();
-            ControlDrag();
             ControlSpeed();
 
             if (Input.GetButtonDown("Jump") && isGrounded)
@@ -210,6 +212,8 @@ public class PlayerMovementRb : MonoBehaviour
 
     private void FixedUpdate()
     {
+        ControlDrag();
+        GravityHandler();
         MovePlayer();
     }
 
