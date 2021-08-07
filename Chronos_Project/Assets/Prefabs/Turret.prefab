@@ -73,6 +73,7 @@ GameObject:
   - component: {fileID: 8256053499019376695}
   - component: {fileID: 7264795427274676803}
   - component: {fileID: 5573849791916217561}
+  - component: {fileID: 7210515521039159526}
   m_Layer: 0
   m_Name: Stand
   m_TagString: Untagged
@@ -143,6 +144,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!114 &7210515521039159526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2022392181362764806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 048ecc258b258ba48afe42fbd603bea3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {x: 0, y: 0, z: 0}
+  speed: 0
+  loop: 0
+  waitseconds: 0
 --- !u!1 &2479434668850650967
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,13 +209,15 @@ MonoBehaviour:
   player: {fileID: 0}
   head: {fileID: 1302346943668792427}
   pointOfRay: {fileID: 1302346945058567996}
-  lr: {fileID: 0}
   explosionEffect: {fileID: 1121192042590650, guid: e1b08032bec16ba4eb1ae23cbd572664, type: 3}
   aktivate: {fileID: 2479434668850650965}
   explosionsfx: {fileID: 8300000, guid: c401d00c96b512e488d2e3bf5d111509, type: 3}
   turnSpeed: 15
   range: 15
   timeToFire: 250
+  rndTimeToFire: 0
+  minRandomTTF: 80
+  maxRandomTTF: 150
   explosionradius: 3
   explosionForce: 20
 --- !u!82 &2479434668850650965
