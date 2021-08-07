@@ -3,7 +3,22 @@ guid: 533e6306753b13644b9be58e9250b4ab
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Black
+    second: {fileID: 2100000, guid: 8d5b8ac4a4e3ac84da4cd0d5dd9efbf3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Dach_ziegel
+    second: {fileID: 2100000, guid: 8aad492b995cb4f4e9407b2c7364a0b5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wood
+    second: {fileID: 2100000, guid: 00bc470cc7cc64640bfb6006f44b7b65, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
