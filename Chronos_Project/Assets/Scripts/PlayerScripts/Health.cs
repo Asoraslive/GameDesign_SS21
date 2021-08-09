@@ -6,28 +6,45 @@ public class Health : MonoBehaviour
 {
     public Healthbar healthbar;
     int maxHealth = 100;
-    int currentHealth;
-    int dmg = 34;
+    public float currentHealth;
+    int damage = 34;
     public Transform respawn;
-
+    private bool healthRegen;
+    public float regenDelay = 2f;
+    public float regenPerFrame = 1f;
 
 
     private void Start()
     {
         currentHealth = maxHealth;
         healthbar.SetMaxHealth(maxHealth);
+        healthRegen = true;
     }
 
-    public bool TakeDamage()
+    private void FixedUpdate()
+    {
+        if (healthRegen && currentHealth <= maxHealth)
+        {
+            currentHealth += regenPerFrame;
+            if(currentHealth > maxHealth)
+            {
+                currentHealth = maxHealth;
+            }
+        }
+    }
+
+    public bool TakeDamage(float dmg)
     {
         currentHealth -= dmg;
-        healthbar.updateHealth(currentHealth);
+        StopCoroutine("StartRegen");
+        healthbar.updateHealth((int)currentHealth);
         if (currentHealth <= 0)
         {
             Die();
             return true;
         }
-
+        healthRegen = false;
+        StartCoroutine("StartRegen");
         return false;
     }
 
@@ -51,5 +68,11 @@ public class Health : MonoBehaviour
         {
             Die();
         }
+    }
+
+    IEnumerator StartRegen()
+    {
+        yield return new WaitForSeconds(regenDelay);
+        healthRegen = true;
     }
 }

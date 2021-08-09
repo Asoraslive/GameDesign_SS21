@@ -73,7 +73,6 @@ GameObject:
   - component: {fileID: 8256053499019376695}
   - component: {fileID: 7264795427274676803}
   - component: {fileID: 5573849791916217561}
-  - component: {fileID: 7210515521039159526}
   m_Layer: 0
   m_Name: Stand
   m_TagString: Untagged
@@ -144,22 +143,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &7210515521039159526
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2022392181362764806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 048ecc258b258ba48afe42fbd603bea3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  direction: {x: 0, y: 0, z: 0}
-  speed: 0
-  loop: 0
-  waitseconds: 0
 --- !u!1 &2479434668850650967
 GameObject:
   m_ObjectHideFlags: 0
@@ -171,6 +154,7 @@ GameObject:
   - component: {fileID: 2964327454611719661}
   - component: {fileID: 2479434668850650964}
   - component: {fileID: 2479434668850650965}
+  - component: {fileID: 268710991260599162}
   m_Layer: 0
   m_Name: Turret
   m_TagString: Untagged
@@ -316,6 +300,22 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &268710991260599162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2479434668850650967}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 048ecc258b258ba48afe42fbd603bea3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: {x: 0, y: 0, z: 0}
+  speed: 0
+  loop: 0
+  waitseconds: 0
 --- !u!1 &2676742281183006818
 GameObject:
   m_ObjectHideFlags: 0
