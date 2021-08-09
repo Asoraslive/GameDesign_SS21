@@ -45,7 +45,7 @@ public class TimeTravel : MonoBehaviour
             }
             else
             {
-                Debug.Log(child.gameObject.name + "hat keine Zeit");
+                //Debug.Log(child.gameObject.name + "hat keine Zeit");
             }
         }
     }

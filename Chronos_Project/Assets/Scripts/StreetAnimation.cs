@@ -83,10 +83,10 @@ public class StreetAnimation : MonoBehaviour {
         Vector3 y_standard = new Vector3(0, 1, 0);
         Vector3 direction_y_projection = new Vector3(v.x, 0, v.z).normalized;
         double y_angle = Math.Acos(Vector3.Dot(forward, direction_y_projection));
-        Debug.Log("Skalar Produkt: " + Vector3.Dot(forward, direction_y_projection));
-        Debug.Log(v);
-        Debug.Log(v.normalized);
-        Debug.Log("Winkel: " + y_angle);
+        //Debug.Log("Skalar Produkt: " + Vector3.Dot(forward, direction_y_projection));
+        //Debug.Log(v);
+        //Debug.Log(v.normalized);
+        //Debug.Log("Winkel: " + y_angle);
         float angle = (float)(y_angle * 180 / Math.PI);
         if(v.z > 0) {
             angle = -angle;

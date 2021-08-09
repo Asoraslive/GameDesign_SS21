@@ -78,6 +78,8 @@ MonoBehaviour:
   speed: 1
   left_door: {fileID: 2075374443256105379}
   right_door: {fileID: 8973398091037340336}
+  locked_material: {fileID: 0}
+  lockdown_material: {fileID: 0}
 --- !u!64 &3637806120967552068
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -146,7 +148,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 4844e2f2e14353e4d961133af40f009f, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ddc07094336185f4a8774837f588925c, type: 2}
+      objectReference: {fileID: 2100000, guid: 15cf4bd1317552248ac99a45dd86fef6, type: 2}
     - target: {fileID: 919132149155446097, guid: 4844e2f2e14353e4d961133af40f009f, type: 3}
       propertyPath: m_Name
       value: Door_links
@@ -217,7 +219,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: 4b912b023996790448b09e307eae0e7a, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: ddc07094336185f4a8774837f588925c, type: 2}
+      objectReference: {fileID: 2100000, guid: 15cf4bd1317552248ac99a45dd86fef6, type: 2}
     - target: {fileID: -7511558181221131132, guid: 4b912b023996790448b09e307eae0e7a, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 

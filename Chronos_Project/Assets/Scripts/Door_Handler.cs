@@ -16,11 +16,10 @@ public class Door_Handler : MonoBehaviour {
 
     private bool active = false;
 
-    private Vector3 start_position;
+    private bool lockdown = false;
 
-    private void Start() {
-        start_position = left_door.position;
-    }
+    [SerializeField] private Material locked_material;
+    [SerializeField] private Material lockdown_material;
 
     // Update is called once per frame
     void Update() {
@@ -28,33 +27,23 @@ public class Door_Handler : MonoBehaviour {
             if (opening) {  // Open Doors
                 left_door.position += (new Vector3(1,0,0) * speed) * Time.deltaTime;
                 right_door.position += (new Vector3(-1, 0, 0) * speed) * Time.deltaTime;
-                //if ((left_door.position - start_position).magnitude >= open_width) {
-                //    active = false;
-                //}
             }
             else {          // Close Doors
                 left_door.position += (new Vector3(-1, 0, 0) * speed) * Time.deltaTime;
                 right_door.position += (new Vector3(1, 0, 0) * speed) * Time.deltaTime;
-                //if ((left_door.position - start_position).magnitude <= 0.05f) {
-                //    active = false;
-                //}
             }
-            /*if(counter == 0) {
-                active = false;
-            }
-            counter--;*/
         }
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!active) {
+        if (!active && !lockdown) {
             opening = true;
             StartCoroutine(WaitCoroutine());
         }
     }
 
     private void OnTriggerExit(Collider other) {
-        if (!active) {
+        if (!active & !lockdown) {
             opening = false;
             StartCoroutine(WaitCoroutine());
         }
@@ -64,5 +53,15 @@ public class Door_Handler : MonoBehaviour {
         active = true;
         yield return new WaitForSeconds(open_width / speed);
         active = false;
+    }
+
+    public void lockdownStatus(bool status) {
+        lockdown = status;
+        if (status) {
+            locked_material.Lerp(locked_material, lockdown_material, 3.0f);
+        }
+        else {
+            locked_material.Lerp(lockdown_material, locked_material, 3.0f);
+        }
     }
 }
