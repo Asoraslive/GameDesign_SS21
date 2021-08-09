@@ -25,8 +25,28 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
+      name: Brown Fabric
+    second: {fileID: 2100000, guid: 98b75dde77503174d81554faf3ab505e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
       name: Glass
     second: {fileID: 2100000, guid: 0fcc21f752454824a81a2a1623147ad7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Lamp
+    second: {fileID: 2100000, guid: b375a2b9d9d4f2d41ad6db9f8868e37c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Light_bar_locked
+    second: {fileID: 2100000, guid: 1d6363c174fdffa43aa404548c665968, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Marble
+    second: {fileID: 2100000, guid: 7a4279502d000ab499444c84d368c23c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
