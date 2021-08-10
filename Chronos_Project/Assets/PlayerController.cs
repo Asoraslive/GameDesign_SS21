@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour
 {
     /*  Variables   */
@@ -10,6 +11,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] GameObject orientation;
     [SerializeField] DetectObj groundDetect;
     [SerializeField] DetectObj WallDetect;
+    [SerializeField] AnimationStateController animationStateController;
 
 
 
@@ -65,10 +67,6 @@ public class PlayerController : MonoBehaviour
 
 
     /*  Awake,Start,Update,FixedUpdate    */
-    private void Awake()
-    {
-        rbPlayer = GetComponent<Rigidbody>();
-    }
     private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
@@ -221,8 +219,11 @@ public class PlayerController : MonoBehaviour
             rbPlayer.velocity = new Vector3(vel.x, 0, vel.z);
         else if (rbPlayer.velocity.y > 0)
             rbPlayer.velocity = new Vector3(vel.x, vel.y / 2, vel.z);
-
+        
         if (!grounded) djumping = false;
+
+        //play animation
+        animationStateController.TriggerJump();
     }
 
     /*JumpCooldown*/
@@ -239,7 +240,7 @@ public class PlayerController : MonoBehaviour
     private bool isWall() { return WallDetect.Obstructed;  }
 
     /*Bool check if is in Air*/
-    private bool isFloating() { return groundDetect.Obstructed == false ? true : false; }
+    public bool isFloating() { return groundDetect.Obstructed == false ? true : false; }
 
     /*Checking all Colliders*/
     private void checkAllColliders() 
