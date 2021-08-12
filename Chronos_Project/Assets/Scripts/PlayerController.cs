@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] DetectObj WallDetect;
     [SerializeField] AnimationStateController animationStateController;
     [SerializeField] Camera cam;
+    [SerializeField] PauseMenu pauseMenuScript;
+
 
 
     /*Camera*/
@@ -141,7 +143,7 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        Look(mouseX, mouseY);
+        if(pauseMenuScript.getPause() == false)Look(mouseX, mouseY);
     }
 
     /*  Simple Movement */
@@ -424,4 +426,13 @@ public class PlayerController : MonoBehaviour
         //Perform the rotations
         cam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
     }
+
+
+
+    /*Setter / Getter */
+    public void setFov(float newFov)
+    {
+        fov = newFov;
+    }
+    public float getFov() { return fov; }
 }
