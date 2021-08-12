@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class SettingsMenu : MonoBehaviour
 {
+    public PlayerController pC;
     public AudioMixer mixer;
     Resolution[] resolutions;
     public Dropdown resolutionDropdown;
@@ -40,5 +41,10 @@ public class SettingsMenu : MonoBehaviour
     public void SetFullscreen(bool isFullscreen)
     {
         Screen.fullScreen = isFullscreen;
+    }
+
+    public void changeFov(float newFov)
+    {
+        pC.setFov(newFov*100);
     }
 }
