@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2155.206, g: 2258.19, b: 3293.8594, a: 1}
+  m_IndirectSpecularColor: {r: 2155.7869, g: 2258.7407, b: 3294.1099, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2246,8 +2246,12 @@ PrefabInstance:
       objectReference: {fileID: 8300000, guid: c401d00c96b512e488d2e3bf5d111509, type: 3}
     - target: {fileID: 2479434668850650964, guid: b75afb3687b5e3d4bab401141c9a344f, type: 3}
       propertyPath: damagePerShot
-      value: 5
+      value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 2479434668850650964, guid: b75afb3687b5e3d4bab401141c9a344f, type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 4758155035612779259, guid: c47b997ecf3057b46bc45f679d6e0674, type: 3}
     - target: {fileID: 2479434668850650967, guid: b75afb3687b5e3d4bab401141c9a344f, type: 3}
       propertyPath: m_Name
       value: Turret

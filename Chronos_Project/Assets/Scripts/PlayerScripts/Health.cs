@@ -37,7 +37,7 @@ public class Health : MonoBehaviour
     {
         currentHealth -= dmg;
         StopCoroutine("StartRegen");
-        healthbar.updateHealth((int)currentHealth);
+        //healthbar.updateHealth((int)currentHealth);
         if (currentHealth <= 0)
         {
             Die();

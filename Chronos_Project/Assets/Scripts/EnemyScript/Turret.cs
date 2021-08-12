@@ -10,6 +10,7 @@ public class Turret : MonoBehaviour
     public GameObject player; //Sucht nach diesem Objekt
     public Transform head; //zum rotieren
     public Transform pointOfRay; // start des Raycasts
+    public GameObject projectilePrefab;
     //public LineRenderer lr;
     //public GameObject explosionEffect;
     //public AudioSource aktivate;
@@ -23,7 +24,7 @@ public class Turret : MonoBehaviour
     public float minRandomTTF = 80f;
     public float maxRandomTTF = 150f;
     public float delayBetweenShots = 3f;
-    public float damagePerShot;
+    //public float damagePerShot;
 
     [Header("Explosion")]
     //public float explosionradius = 1f;
@@ -87,9 +88,9 @@ public class Turret : MonoBehaviour
             head.rotation = Quaternion.Euler(0f, rotation.y, 0f);
             Debug.DrawRay(pointOfRay.position, dir, Color.cyan);
             //Wenn der Spieler anvisiert ist, wird der Timer runtergezählt. Wenn der Spieler nicht mehr anvisiert ist, resettet der Timer. Wenn der Timer abgelaufen ist feuert der Turm
-            RaycastHit hit;
-            if (Physics.Raycast(pointOfRay.position, dir, out hit, range))
-            {
+            //RaycastHit hit;
+            //if (Physics.Raycast(pointOfRay.position, dir, out hit, range))
+            //{
                 /*if (hit.transform.name == player.transform.name)
                 {
                     aktivate.Play();
@@ -110,30 +111,30 @@ public class Turret : MonoBehaviour
                     //lr.SetPosition(1, nullV);
                     aktTime = timeToFire;
                 }*/
-                if(aktTime > 0)
-                {
-                    //Debug.Log("Charging");
-                    aktTime--;
-                }
-                else if (aktTime == 0)
-                {
-                    if (delayTime == 0)
-                    {
-                        delayTime = delayBetweenShots;
-                        //Debug.Log("hit:" + hit.transform.name);
-                        if (hit.transform.name == player.transform.name)
-                        {
-                            hit.rigidbody.GetComponent<Health>().TakeDamage(damagePerShot);
-                            Debug.Log(hit.rigidbody.GetComponent<Health>().currentHealth);
-                        }
-                    }
-                    else
-                    {
-                        delayTime--;
-                    }
-                    
-                }
+            if(aktTime > 0)
+            {
+                //Debug.Log("Charging");
+                aktTime--;
             }
+            else if (aktTime <= 0)
+            {
+                if (delayTime <= 0)
+                {
+                    delayTime = delayBetweenShots;
+                    GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, pointOfRay.position, pointOfRay.rotation);
+                    Projectile projectile = projectileGO.GetComponent<Projectile>();
+
+                    if(projectile != null)
+                    {
+                        projectile.Seek(dir);
+                    }
+                }
+                else
+                {
+                    delayTime--;
+                } 
+            }
+            //}
         }
     }
 
