@@ -6,14 +6,15 @@ public class Turret : MonoBehaviour
 {
 
     [Header("References")]
-    private Transform target; //position des Targets
+    public Transform target; //position des Targets
     public GameObject player; //Sucht nach diesem Objekt
     public Transform head; //zum rotieren
     public Transform pointOfRay; // start des Raycasts
+    public GameObject projectilePrefab;
     //public LineRenderer lr;
-    public GameObject explosionEffect;
-    public AudioSource aktivate;
-    public AudioClip explosionsfx;
+    //public GameObject explosionEffect;
+    //public AudioSource aktivate;
+    //public AudioClip explosionsfx;
 
     [Header("Turret Specs")]
     public float turnSpeed = 25f;
@@ -22,15 +23,18 @@ public class Turret : MonoBehaviour
     public bool rndTimeToFire = false;
     public float minRandomTTF = 80f;
     public float maxRandomTTF = 150f;
+    public float delayBetweenShots = 3f;
+    //public float damagePerShot;
 
     [Header("Explosion")]
-    public float explosionradius = 1f;
-    public float explosionForce = 20f;
+    //public float explosionradius = 1f;
+    //public float explosionForce = 20f;
 
     //Privates
     private Vector3 nullV = new Vector3(0,0,0);
-    private bool soundplayed = false;
+    //private bool soundplayed = false;
     private float aktTime;
+    private float delayTime;
     private bool shot;
 
 
@@ -44,7 +48,8 @@ public class Turret : MonoBehaviour
         }
         else
         {
-        aktTime = timeToFire;
+            aktTime = timeToFire;
+            delayTime = delayBetweenShots;
         }
 
         InvokeRepeating("UpdateTarget", 0f, 0.5f); //sucht nach dem Spieler jede 0.5 Sekunden
@@ -68,7 +73,7 @@ public class Turret : MonoBehaviour
     {
         if (target == null)
         {
-            soundplayed = false;
+            //soundplayed = false;
             //lr.SetPosition(1, nullV);//schaltet den laser aus
             aktTime = timeToFire;
         }
@@ -83,10 +88,10 @@ public class Turret : MonoBehaviour
             head.rotation = Quaternion.Euler(0f, rotation.y, 0f);
             Debug.DrawRay(pointOfRay.position, dir, Color.cyan);
             //Wenn der Spieler anvisiert ist, wird der Timer runtergezählt. Wenn der Spieler nicht mehr anvisiert ist, resettet der Timer. Wenn der Timer abgelaufen ist feuert der Turm
-            RaycastHit hit;
-            if (Physics.Raycast(pointOfRay.position, dir, out hit, range))
-            {
-                if (hit.transform.name == player.transform.name)
+            //RaycastHit hit;
+            //if (Physics.Raycast(pointOfRay.position, dir, out hit, range))
+            //{
+                /*if (hit.transform.name == player.transform.name)
                 {
                     aktivate.Play();
                     soundplayed = true;
@@ -105,11 +110,31 @@ public class Turret : MonoBehaviour
                 {
                     //lr.SetPosition(1, nullV);
                     aktTime = timeToFire;
-                }
+                }*/
+            if(aktTime > 0)
+            {
+                //Debug.Log("Charging");
+                aktTime--;
             }
+            else if (aktTime <= 0)
+            {
+                if (delayTime <= 0)
+                {
+                    delayTime = delayBetweenShots;
+                    GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, pointOfRay.position, pointOfRay.rotation);
+                    Projectile projectile = projectileGO.GetComponent<Projectile>();
 
-
-          
+                    if(projectile != null)
+                    {
+                        projectile.Seek(dir);
+                    }
+                }
+                else
+                {
+                    delayTime--;
+                } 
+            }
+            //}
         }
     }
 
@@ -118,7 +143,7 @@ public class Turret : MonoBehaviour
         return target.position - pointOfRay.position;
     }
 
-    IEnumerator Shoot (Vector3 direction)
+    /*IEnumerator Shoot (Vector3 direction)
     {
         yield return new WaitForSeconds(0.05f);
         RaycastHit t;
@@ -150,7 +175,7 @@ public class Turret : MonoBehaviour
             }
         }
         shot = false;
-    }
+    }*/
 
 
     private void OnDrawGizmosSelected()
