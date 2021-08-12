@@ -12,6 +12,22 @@ public class PlayerController : MonoBehaviour
     [SerializeField] DetectObj groundDetect;
     [SerializeField] DetectObj WallDetect;
     [SerializeField] AnimationStateController animationStateController;
+    [SerializeField] Camera cam;
+
+
+    /*Camera*/
+    [Header("Camera Stuff")]
+    [SerializeField] float xRotation;
+    [SerializeField] float sensitivity = 50f;
+    [SerializeField] float sensMultiplier = 1f;
+    [SerializeField] float fov = 70f;
+    [SerializeField] float wallrunFovChanger = 30f;
+    [SerializeField] float fovChangeTime = 5f;
+    [SerializeField] float tilt = 20f;
+    [SerializeField] float mouseX;
+    [SerializeField] float mouseY;
+
+
 
 
 
@@ -51,9 +67,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] Collider currentWall;
     [SerializeField] Collider newWall;
     [SerializeField] float wallDrag = .1f;
+    [SerializeField] float wallrunCooldownTime = 3f;
+    [SerializeField] float wallrunEndCooldownTime = .3f;
 
     private IEnumerator wallrunCd;
-    private bool wallrunCdCRActive;
+    [SerializeField] bool wallrunCdCRActive;
 
     [Header("ArchingParameters")]
     [SerializeField] float WallrunUpforce;
@@ -66,8 +84,12 @@ public class PlayerController : MonoBehaviour
 
 
 
-    /*  Awake,Start,Update,FixedUpdate    */
-    private void Start()
+        /*  Awake,Start,Update,FixedUpdate    */
+        private void Awake()
+        {
+
+        }
+        private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -76,8 +98,11 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         moveDir = playerInputHandle();
+
         if ((grounded || djumping) && Input.GetKeyDown(KeyCode.Space) && (jumpingCooldown == false) && !isWallRunning) Jump();
         else if (jumpingCooldown == true && Input.GetKeyDown(KeyCode.Space)) Debug.Log("Jump on Cooldown");
+        else if (isWallRunning && Input.GetKeyDown(KeyCode.Space)) wallJump();
+
 
         if (checkWallrun() && Input.GetKey(KeyCode.Space) && !isWallRunning && !grounded) startWallrun();
         else if ((checkWallrun() == false || Input.GetKeyUp(KeyCode.Space)) && isWallRunning) stopWallrun();
@@ -85,14 +110,14 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if(!godMode)
-        checkAllColliders();
+        if (!godMode)
+            checkAllColliders();
 
         //Handle Drag
-        if (grounded) 
+        if (grounded)
         {
             currentWall = null;
-            DragHandler(groundDrag); 
+            DragHandler(groundDrag);
         }
         else if (floating && !isWallRunning) DragHandler(airDrag);
         else if (isWallRunning) DragHandler(wallDrag);
@@ -105,17 +130,28 @@ public class PlayerController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.G)) { godMode = !godMode; if (godMode == true) { gravity = false; } else gravity = true; }
         GodMode();
-        if (!isWallRunning) movePlayer(moveDir);
+        if (!isWallRunning) { movePlayer(moveDir); }
         else if (isWallRunning) RunWall();
-        
+
+        if (!isWallRunning && wallrunCdCRActive == false)
+        {
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, fovChangeTime * Time.deltaTime);
+        }
     }
 
+    private void LateUpdate()
+    {
+        Look(mouseX, mouseY);
+    }
 
     /*  Simple Movement */
 
     /*  Get Player Input */
     public Vector3 playerInputHandle() 
     {
+        mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
+        mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
+
         jumping = Input.GetKeyDown(KeyCode.Space);
         return new Vector3(Input.GetAxisRaw("Horizontal"),0,Input.GetAxisRaw("Vertical"));
     }
@@ -281,7 +317,9 @@ public class PlayerController : MonoBehaviour
     {
         if (wallrunCdCRActive) {
             Debug.Log("Force Shut");
-            StopCoroutine(wallrunCd); }
+            StopCoroutine(wallrunCd);
+            wallrunCdCRActive = false;        
+        }
 
         StartCoroutine(wallrunEndCooldown());
     }
@@ -289,43 +327,38 @@ public class PlayerController : MonoBehaviour
     /*WallrunEndCooldown*/
     private IEnumerator wallrunEndCooldown()
     {
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(wallrunEndCooldownTime);
         isWallRunning = false;
         gravity = true;
         Debug.Log("End normal");
     }
 
 
-    /*Set Wallrun Parameters*/
-    private void wallRunUpdate()
+    /*Set WallJump Parameters*/
+    private void wallJump()
     {
-        //get Contact Point of wall
+            rbPlayer.velocity = transform.forward * wallJumpForwardVelocity + transform.up * wallJumpUpVelocity;
+            //rbPlayer.AddForce(transform.forward * wallJumpForwardVelocity + transform.up * wallJumpUpVelocity , ForceMode.Impulse);
+            Debug.Log("Walljumped");
+            StartCoroutine(jumpCooldown());
+            isWallRunning = false;
+            gravity = true;
+
 
     }
 
     /*Runwall movement*/
     private void RunWall()
     {
+        //lerp Fov
+            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov+wallrunFovChanger, fovChangeTime*Time.deltaTime);
 
         //stick to wall
         rbPlayer.AddForce(-WallDetect.normalOfColliding*Time.deltaTime);
 
-        //wallRunUpdate
-        wallRunUpdate();
-
         //arch
         rbPlayer.velocity = new Vector3(rbPlayer.velocity.x, upforce, rbPlayer.velocity.z);
         upforce -= WallrunUpforce_DecreaseRate * Time.deltaTime;
-
-        //wallJump
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            rbPlayer.velocity = transform.forward * wallJumpForwardVelocity + transform.up * wallJumpUpVelocity;
-            Debug.Log("Walljumped");
-            StartCoroutine(jumpCooldown());
-            isWallRunning = false;
-            gravity = true;
-        }
 
 
 
@@ -344,7 +377,7 @@ public class PlayerController : MonoBehaviour
     {
         Debug.Log("Started Routine");
         wallrunCdCRActive = true;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(wallrunCooldownTime);
         wallrunCdCRActive = false;
         stopWallrun();
         
@@ -373,5 +406,22 @@ public class PlayerController : MonoBehaviour
             }
         }
         
+    }
+
+
+    /*Camera Stuff*/
+    private float desiredX;
+    private void Look(float x,float y)
+    {
+        //Find current look rotation
+        Vector3 rot = cam.transform.localRotation.eulerAngles;
+        desiredX = rot.y + x;
+
+        //Rotate, and also make sure we dont over- or under-rotate.
+        xRotation -= y;
+        xRotation = Mathf.Clamp(xRotation, -90f, 90f);
+
+        //Perform the rotations
+        cam.transform.localRotation = Quaternion.Euler(xRotation, desiredX, 0);
     }
 }
