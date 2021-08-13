@@ -13,6 +13,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: 230
+  active: 0
+  lights_deactivated: {fileID: 2100000, guid: 5f3b33d4ebf38114b89030e0a724dd69, type: 2}
+  lights_activated: {fileID: 2100000, guid: e0720f57f62b6f843883cff5801ddc43, type: 2}
+  status_light: {fileID: 2100000, guid: 9210d36bfc8d776449be35f204cef14d, type: 2}
 --- !u!1 &6390066450880502229
 GameObject:
   m_ObjectHideFlags: 0
@@ -98,7 +102,7 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: b8f8e7a627f4e3044b3a34fcdcfc8223, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
-      objectReference: {fileID: 2100000, guid: ab4d2d193d098494bbd018f2ffe8135b, type: 2}
+      objectReference: {fileID: 2100000, guid: 9210d36bfc8d776449be35f204cef14d, type: 2}
     - target: {fileID: -7511558181221131132, guid: b8f8e7a627f4e3044b3a34fcdcfc8223, type: 3}
       propertyPath: m_Materials.Array.data[2]
       value: 
