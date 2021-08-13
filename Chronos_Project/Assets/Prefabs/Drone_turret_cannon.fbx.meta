@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 0943a75d2e1237b4da36d5bef9f78b74
+guid: f947914b2a5812e40bd2ebf6709c0591
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,28 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: black
-    second: {fileID: 2100000, guid: 8d5b8ac4a4e3ac84da4cd0d5dd9efbf3, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: dark
-    second: {fileID: 2100000, guid: 15cf4bd1317552248ac99a45dd86fef6, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: light
-    second: {fileID: 2100000, guid: 5e4eb57b0246e4f4a9dbf1870b24f11c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
       name: light_bar_white
     second: {fileID: 2100000, guid: 5e4eb57b0246e4f4a9dbf1870b24f11c, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: metal
-    second: {fileID: 2100000, guid: ddc07094336185f4a8774837f588925c, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule

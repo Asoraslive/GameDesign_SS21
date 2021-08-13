@@ -11,6 +11,10 @@ public class Turret : MonoBehaviour
     public Transform head; //zum rotieren
     public Transform pointOfRay; // start des Raycasts
     public GameObject projectilePrefab;
+
+    public Transform body;
+    public Transform cannon;
+
     //public LineRenderer lr;
     //public GameObject explosionEffect;
     //public AudioSource aktivate;
@@ -24,24 +28,21 @@ public class Turret : MonoBehaviour
     public float minRandomTTF = 80f;
     public float maxRandomTTF = 150f;
     public float delayBetweenShots = 3f;
-    //public float damagePerShot;
+   
 
     [Header("Explosion")]
     //public float explosionradius = 1f;
     //public float explosionForce = 20f;
 
     //Privates
-    private Vector3 nullV = new Vector3(0,0,0);
     //private bool soundplayed = false;
     private float aktTime;
     private float delayTime;
-    private bool shot;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        shot = false;
         if (rndTimeToFire)
         {
             aktTime = Random.Range(80f, 150f);
@@ -69,51 +70,22 @@ public class Turret : MonoBehaviour
     }
 
     // Update is called once per frame
-    void FixedUpdate()
+    void Update()
     {
         if (target == null)
         {
-            //soundplayed = false;
-            //lr.SetPosition(1, nullV);//schaltet den laser aus
             aktTime = timeToFire;
         }
 
-        else if(!shot)
-        {
-            //lr.SetColors(Color.green, Color.green);
             //Rotiert den Kopf
             Vector3 dir = getTarget();
             Quaternion lookRotation = Quaternion.LookRotation(dir);
             Vector3 rotation = Quaternion.Lerp(head.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
             head.rotation = Quaternion.Euler(0f, rotation.y, 0f);
             Debug.DrawRay(pointOfRay.position, dir, Color.cyan);
-            //Wenn der Spieler anvisiert ist, wird der Timer runtergezählt. Wenn der Spieler nicht mehr anvisiert ist, resettet der Timer. Wenn der Timer abgelaufen ist feuert der Turm
-            //RaycastHit hit;
-            //if (Physics.Raycast(pointOfRay.position, dir, out hit, range))
-            //{
-                /*if (hit.transform.name == player.transform.name)
-                {
-                    aktivate.Play();
-                    soundplayed = true;
-                    //lr.SetPosition(1, hit.transform.position);
-                    aktTime--;
-                    if (aktTime == 0)
-                    {
-                        aktTime = timeToFire;
-                        shot = true;
-                        
-                        StartCoroutine(Shoot(getTarget()));
-                        //lr.SetColors(Color.red, Color.red);
-                    }
-                }
-                else
-                {
-                    //lr.SetPosition(1, nullV);
-                    aktTime = timeToFire;
-                }*/
+        
             if(aktTime > 0)
             {
-                //Debug.Log("Charging");
                 aktTime--;
             }
             else if (aktTime <= 0)
@@ -123,19 +95,12 @@ public class Turret : MonoBehaviour
                     delayTime = delayBetweenShots;
                     GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, pointOfRay.position, pointOfRay.rotation);
                     Projectile projectile = projectileGO.GetComponent<Projectile>();
-
-                    if(projectile != null)
-                    {
-                        projectile.Seek(dir);
-                    }
                 }
                 else
                 {
                     delayTime--;
                 } 
             }
-            //}
-        }
     }
 
     private Vector3 getTarget()

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2180.5552, g: 2320.003, b: 3486.497, a: 1}
+  m_IndirectSpecularColor: {r: 2158.9248, g: 2262.709, b: 3300.4844, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4307,6 +4307,10 @@ PrefabInstance:
       value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 268710991260599162, guid: b75afb3687b5e3d4bab401141c9a344f, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 268710991260599162, guid: b75afb3687b5e3d4bab401141c9a344f, type: 3}
       propertyPath: direction.z
       value: 0
       objectReference: {fileID: 0}
@@ -4329,7 +4333,7 @@ PrefabInstance:
     - target: {fileID: 2479434668850650964, guid: b75afb3687b5e3d4bab401141c9a344f, type: 3}
       propertyPath: projectilePrefab
       value: 
-      objectReference: {fileID: 4758155035612779259, guid: c47b997ecf3057b46bc45f679d6e0674, type: 3}
+      objectReference: {fileID: 4027337854584383641, guid: 555bb938b26462049ad85276ca0f16d9, type: 3}
     - target: {fileID: 2479434668850650964, guid: b75afb3687b5e3d4bab401141c9a344f, type: 3}
       propertyPath: delayBetweenShots
       value: 7.89
