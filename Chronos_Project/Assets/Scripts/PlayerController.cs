@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Cinemachine;
 
 public class PlayerController : MonoBehaviour
 {
@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] DetectObj groundDetect;
     [SerializeField] DetectObj WallDetect;
     [SerializeField] AnimationStateController animationStateController;
-    [SerializeField] Camera cam;
+    [SerializeField] CinemachineVirtualCamera cam;
     [SerializeField] PauseMenu pauseMenuScript;
 
 
@@ -28,6 +28,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float tilt = 20f;
     [SerializeField] float mouseX;
     [SerializeField] float mouseY;
+    [SerializeField] float mouseXSens;
+    [SerializeField] float mouseYSens;
 
 
 
@@ -96,6 +98,7 @@ public class PlayerController : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         floating = isFloating();
+        cam.m_Lens.FieldOfView = fov;
     }
     private void Update()
     {
@@ -136,13 +139,13 @@ public class PlayerController : MonoBehaviour
 
         if (!isWallRunning && wallrunCdCRActive == false)
         {
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov, fovChangeTime * Time.deltaTime);
+            cam.m_Lens.FieldOfView = Mathf.Lerp(cam.m_Lens.FieldOfView, fov, fovChangeTime * Time.deltaTime);
         }
     }
 
     private void LateUpdate()
     {
-        if (pauseMenuScript.getPause() == false) Look(mouseX, mouseY);
+       // if (pauseMenuScript.getPause() == false) Look(mouseX, mouseY);
     }
 
     /*  Simple Movement */
@@ -150,8 +153,8 @@ public class PlayerController : MonoBehaviour
     /*  Get Player Input */
     public Vector3 playerInputHandle() 
     {
-        mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
-        mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
+        //mouseX = Input.GetAxis("Mouse X") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
+        //mouseY = Input.GetAxis("Mouse Y") * sensitivity * Time.fixedDeltaTime * sensMultiplier;
 
         jumping = Input.GetKeyDown(KeyCode.Space);
         return new Vector3(Input.GetAxisRaw("Horizontal"),0,Input.GetAxisRaw("Vertical"));
@@ -352,7 +355,7 @@ public class PlayerController : MonoBehaviour
     private void RunWall()
     {
         //lerp Fov
-            cam.fieldOfView = Mathf.Lerp(cam.fieldOfView, fov+wallrunFovChanger, fovChangeTime*Time.deltaTime);
+        cam.m_Lens.FieldOfView = Mathf.Lerp(cam.m_Lens.FieldOfView, fov+wallrunFovChanger, fovChangeTime*Time.deltaTime);
 
         //stick to wall
         rbPlayer.AddForce(-WallDetect.normalOfColliding*Time.deltaTime);
@@ -432,6 +435,7 @@ public class PlayerController : MonoBehaviour
     public void setFov(float newFov)
     {
         fov = newFov;
+        cam.m_Lens.FieldOfView = fov;
     }
     public float getFov() { return fov; }
 }
