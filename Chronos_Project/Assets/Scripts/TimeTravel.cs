@@ -7,7 +7,7 @@ public class TimeTravel : MonoBehaviour
     //nimmt sich alle Children von Environment und setzt sie je nach Zeit auf Active
     //jedes Child von Environment braucht entweder Past oder Present Tag um Zeit zu wechseln
 
-    public GameObject flashplayer;
+    public PlayTimeFlash flashplayer;
 
     private bool time; //true = past, false = present
     private Transform[] children; //alle children des Objects
@@ -62,7 +62,7 @@ public class TimeTravel : MonoBehaviour
     {
         traveled = true;
 
-        flashplayer.GetComponent<PlayTimeFlash>().Flash();
+        flashplayer.Flash();
 
         time = !time;
         foreach (Transform child in children)

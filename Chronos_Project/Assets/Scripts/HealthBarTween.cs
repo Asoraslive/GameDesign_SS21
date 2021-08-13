@@ -15,10 +15,11 @@ public class HealthBarTween : MonoBehaviour
     [SerializeField] bool hitCdActive = false;
     [SerializeField] bool regenLife = false;
 
-
+    [SerializeField] Health healthScript;
     // Start is called before the first frame update
     void Start()
     {
+        maxHP = healthScript.maxHealth;
         currentHp = maxHP;
         fill.color = Life;
     }
@@ -59,5 +60,10 @@ public class HealthBarTween : MonoBehaviour
 
         currentHp += maxHP / 10 * Time.deltaTime;
         fill.fillAmount = Mathf.Lerp(fill.fillAmount, currentHp / maxHP, 3f);
+    }
+
+    public void SetMaxHealth(int max)
+    {
+        maxHP = max;
     }
 }

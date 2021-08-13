@@ -100,7 +100,6 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         moveDir = playerInputHandle();
-
         if ((grounded || djumping) && Input.GetKeyDown(KeyCode.Space) && (jumpingCooldown == false) && !isWallRunning) Jump();
         else if (jumpingCooldown == true && Input.GetKeyDown(KeyCode.Space)) Debug.Log("Jump on Cooldown");
         else if (isWallRunning && Input.GetKeyDown(KeyCode.Space)) wallJump();
@@ -143,7 +142,7 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(pauseMenuScript.getPause() == false)Look(mouseX, mouseY);
+        if (pauseMenuScript.getPause() == false) Look(mouseX, mouseY);
     }
 
     /*  Simple Movement */
