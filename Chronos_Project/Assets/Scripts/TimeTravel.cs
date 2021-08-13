@@ -13,7 +13,7 @@ public class TimeTravel : MonoBehaviour
     private Transform[] children; //alle children des Objects
 
     [SerializeField] bool traveled = false;
-    [SerializeField] bool blocked = true;
+    [SerializeField] bool blocked = false;
 
     private void Start()
     {
