@@ -12,8 +12,8 @@ public class TimeTravel : MonoBehaviour
     private bool time; //true = past, false = present
     private Transform[] children; //alle children des Objects
 
-    private bool traveled = false;
-    private bool blocked = true;
+    [SerializeField] bool traveled = false;
+    [SerializeField] bool blocked = true;
 
     private void Start()
     {
