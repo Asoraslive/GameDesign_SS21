@@ -9,7 +9,7 @@ public class DetectObj : MonoBehaviour
     public bool Obstructed;
     private void Awake()
     {
-        colnow = GetComponent<Collider>();
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -24,18 +24,25 @@ public class DetectObj : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        if(other.name != "Map")
         Obstructed = true;
     }
 
     private void OnTriggerStay(Collider col)
     {
+        if(col.name != "Map")
+        {
         Obstructed = true;
         colnow = col;
+        }
     }
 
     private void OnTriggerExit(Collider col)
     {
+        if(col.name != "Map")
+        {
         Obstructed = false;
         colnow = null;
+        }
     }
 }
