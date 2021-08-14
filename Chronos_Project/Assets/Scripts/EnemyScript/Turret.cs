@@ -11,8 +11,9 @@ public class Turret : MonoBehaviour
     public Transform head; //zum rotieren
     public Transform pointOfRay; // start des Raycasts
     public GameObject projectilePrefab;
+    public ParticleSystem muzzleFlash;
 
-    public Transform body;
+    //public Transform body;
     public Transform cannon;
 
     //public LineRenderer lr;
@@ -70,37 +71,42 @@ public class Turret : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         if (target == null)
         {
             aktTime = timeToFire;
         }
 
-            //Rotiert den Kopf
-            Vector3 dir = getTarget();
-            Quaternion lookRotation = Quaternion.LookRotation(dir);
-            Vector3 rotation = Quaternion.Lerp(head.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
-            head.rotation = Quaternion.Euler(0f, rotation.y, 0f);
-            Debug.DrawRay(pointOfRay.position, dir, Color.cyan);
+        //Rotiert den Kopf
+        Vector3 dir = getTarget();
+        Quaternion lookRotation = Quaternion.LookRotation(dir);
+        Vector3 rotation = Quaternion.Lerp(head.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
+        Vector3 rotation2 = Quaternion.Lerp(cannon.rotation, lookRotation, Time.deltaTime * turnSpeed).eulerAngles;
+        head.rotation = Quaternion.Euler(0f, rotation.y, 0f);
+        cannon.rotation = Quaternion.Euler(rotation2.x, rotation2.y, 0f);
+
+
+        Debug.DrawRay(pointOfRay.position, dir, Color.cyan);
         
-            if(aktTime > 0)
+        if(aktTime > 0)
+        {
+            aktTime--;
+        }
+        else if (aktTime <= 0)
+        {
+            if (delayTime <= 0)
             {
-                aktTime--;
+                delayTime = delayBetweenShots;
+                GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, pointOfRay.position, pointOfRay.rotation);
+                Projectile projectile = projectileGO.GetComponent<Projectile>();
+                muzzleFlash.Play();
             }
-            else if (aktTime <= 0)
+            else
             {
-                if (delayTime <= 0)
-                {
-                    delayTime = delayBetweenShots;
-                    GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, pointOfRay.position, pointOfRay.rotation);
-                    Projectile projectile = projectileGO.GetComponent<Projectile>();
-                }
-                else
-                {
-                    delayTime--;
-                } 
-            }
+                delayTime--;
+            } 
+        }
     }
 
     private Vector3 getTarget()

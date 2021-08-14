@@ -28,6 +28,7 @@ public class Projectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log(other.transform.name);
         if (other.CompareTag("Player"))
         {
             other.GetComponent<Health>().TakeDamage(dmg);
