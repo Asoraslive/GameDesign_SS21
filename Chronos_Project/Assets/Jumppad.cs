@@ -5,6 +5,7 @@ using UnityEngine;
 public class Jumppad : MonoBehaviour
 {
     [SerializeField] private float force = 20f;
+    [SerializeField] private float upforce = 20f;
     [SerializeField] private bool active = false;
 
     [SerializeField] private Material lights_deactivated;
@@ -19,7 +20,7 @@ public class Jumppad : MonoBehaviour
     {
         if (active) {
             if (other.CompareTag("Player")) {
-                other.GetComponent<Rigidbody>().AddForce(transform.up * force);
+                other.GetComponent<Rigidbody>().AddForce(transform.up * force + other.transform.up * upforce, ForceMode.Impulse);
             }
         }
         
