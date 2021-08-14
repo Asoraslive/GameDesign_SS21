@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2155.6104, g: 2258.6367, b: 3293.9392, a: 1}
+  m_IndirectSpecularColor: {r: 2156.4622, g: 2259.904, b: 3296.4072, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2888,6 +2888,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   flashplayer: {fileID: 0}
+  traveled: 0
+  blocked: 0
 --- !u!1 &1667442830
 GameObject:
   m_ObjectHideFlags: 0
@@ -9172,6 +9174,10 @@ PrefabInstance:
       propertyPath: muzzleFlash
       value: 
       objectReference: {fileID: 2045954811}
+    - target: {fileID: 1890707915451973996, guid: b75afb3687b5e3d4bab401141c9a344f, type: 3}
+      propertyPath: targetOffset
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1890707915451973996, guid: b75afb3687b5e3d4bab401141c9a344f, type: 3}
       propertyPath: delayBetweenShots
       value: 84.57

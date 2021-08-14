@@ -10,16 +10,17 @@ public class Projectile : MonoBehaviour
     public float dmg = 5;
 
     private float starttime;
-    private int livespan = 5;
+    private int livespan = 1000;
 
     private void Start() {
         starttime = Time.fixedTime;
+        this.GetComponent<Rigidbody>().velocity = this.transform.forward * speed * Time.deltaTime;
     }
 
     // Update is called once per frame
     void Update()
     {
-        this.transform.position += this.transform.forward * speed * Time.deltaTime;
+        
         if (Time.fixedTime >= starttime + livespan) {
             Destroy(gameObject);
             Destroy(this);

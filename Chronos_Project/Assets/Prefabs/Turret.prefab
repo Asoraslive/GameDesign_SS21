@@ -279,6 +279,7 @@ MonoBehaviour:
   head: {fileID: 1890707913921444152}
   pointOfRay: {fileID: 1890707915453161874}
   projectilePrefab: {fileID: 4027337854584383641, guid: 555bb938b26462049ad85276ca0f16d9, type: 3}
+  muzzleFlash: {fileID: 0}
   cannon: {fileID: 1890707914044237570}
   turnSpeed: 15
   range: 15

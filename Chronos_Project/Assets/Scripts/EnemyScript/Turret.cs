@@ -6,7 +6,7 @@ public class Turret : MonoBehaviour
 {
 
     [Header("References")]
-    public Transform target; //position des Targets
+    private Transform target; //position des Targets
     public GameObject player; //Sucht nach diesem Objekt
     public Transform head; //zum rotieren
     public Transform pointOfRay; // start des Raycasts
@@ -29,6 +29,7 @@ public class Turret : MonoBehaviour
     public float minRandomTTF = 80f;
     public float maxRandomTTF = 150f;
     public float delayBetweenShots = 3f;
+    public float targetOffset = 2f;
    
 
     [Header("Explosion")]
@@ -76,6 +77,7 @@ public class Turret : MonoBehaviour
         if (target == null)
         {
             aktTime = timeToFire;
+            return;
         }
 
         //Rotiert den Kopf
@@ -100,7 +102,7 @@ public class Turret : MonoBehaviour
                 delayTime = delayBetweenShots;
                 GameObject projectileGO = (GameObject)Instantiate(projectilePrefab, pointOfRay.position, pointOfRay.rotation);
                 Projectile projectile = projectileGO.GetComponent<Projectile>();
-                muzzleFlash.Play();
+                //muzzleFlash.Play();
             }
             else
             {
@@ -111,7 +113,7 @@ public class Turret : MonoBehaviour
 
     private Vector3 getTarget()
     {
-        return target.position - pointOfRay.position;
+        return target.position - pointOfRay.position + new Vector3(0f, targetOffset, 0f);
     }
 
     /*IEnumerator Shoot (Vector3 direction)
