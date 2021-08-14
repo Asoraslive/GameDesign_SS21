@@ -61,7 +61,7 @@ public class Health : MonoBehaviour
 
     public void Die()
     {
-        player.transform.position = respawn.position;
+        transform.position = respawn.position;
         Rigidbody _rb = GetComponent<Rigidbody>();
         _rb.velocity = Vector3.zero;
         currentHealth = maxHealth;
