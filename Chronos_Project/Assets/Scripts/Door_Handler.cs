@@ -11,6 +11,7 @@ public class Door_Handler : MonoBehaviour {
     [SerializeField] private float speed;
     [SerializeField] private Transform left_door;
     [SerializeField] private Transform right_door;
+    [SerializeField] private AudioSource doorSound;
 
     private bool opening = true;
 
@@ -37,6 +38,7 @@ public class Door_Handler : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (!active && !lockdown) {
+            doorSound.Play();
             opening = true;
             StartCoroutine(WaitCoroutine());
         }
@@ -44,6 +46,7 @@ public class Door_Handler : MonoBehaviour {
 
     private void OnTriggerExit(Collider other) {
         if (!active & !lockdown) {
+            doorSound.Play();
             opening = false;
             StartCoroutine(WaitCoroutine());
         }

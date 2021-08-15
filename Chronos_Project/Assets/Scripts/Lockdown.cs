@@ -9,6 +9,9 @@ public class Lockdown : MonoBehaviour{
 
     [SerializeField] private Material animated_light_bar;
     [SerializeField] private Material light_bar_lockdown;
+    [SerializeField] private AudioSource pickUpSound;
+    [SerializeField] private AudioSource lockDownSound;
+
 
     [SerializeField]
     private UnityEvent startLockDown;
@@ -37,7 +40,15 @@ public class Lockdown : MonoBehaviour{
 
     private void activateLockDown() {
         Debug.Log("Activte LockDown Protocol !");
+        pickUpSound.Play();
         //animated_light_bar.color = Color.red;
+        StartCoroutine("ldSoundPlayer");
+    }
+
+    IEnumerator ldSoundPlayer()
+    {
+        yield return new WaitForSeconds(1f);
         animated_light_bar.Lerp(animated_light_bar, light_bar_lockdown, 3.0f);
+        lockDownSound.Play();
     }
 }
