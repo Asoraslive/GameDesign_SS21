@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.81702024, g: 0.8573633, b: 0.8735523, a: 1}
+  m_IndirectSpecularColor: {r: 0.11796318, g: 0.119236305, b: 0.120696045, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3707,6 +3707,7 @@ MonoBehaviour:
   m_Script: {fileID: 1287543178}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Entries: []
 --- !u!4 &133686763
 Transform:
   m_ObjectHideFlags: 19
@@ -23656,13 +23657,17 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3694133674628135489, guid: f72622788705c37409ce6e845e07a143, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5f3b33d4ebf38114b89030e0a724dd69, type: 2}
     - target: {fileID: 3768546979048829778, guid: f72622788705c37409ce6e845e07a143, type: 3}
       propertyPath: force
       value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 3768546979048829778, guid: f72622788705c37409ce6e845e07a143, type: 3}
       propertyPath: active
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6390066450880502229, guid: f72622788705c37409ce6e845e07a143, type: 3}
       propertyPath: m_Name
@@ -23678,7 +23683,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7972879969408574876, guid: f72622788705c37409ce6e845e07a143, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -33.17091
+      value: -33.996
       objectReference: {fileID: 0}
     - target: {fileID: 7972879969408574876, guid: f72622788705c37409ce6e845e07a143, type: 3}
       propertyPath: m_LocalPosition.z
@@ -37941,7 +37946,7 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6033110159409876293, guid: 59c780aeb3ecced459c1bead1a619a0b, type: 3}
   m_PrefabInstance: {fileID: 289019170}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &1684483474
+--- !u!65 &1684483477
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42393,7 +42398,7 @@ PrefabInstance:
     - target: {fileID: 4618969281814618284, guid: 9ee412b49c347e64d9cbdcc05461d950, type: 3}
       propertyPath: respawn
       value: 
-      objectReference: {fileID: 300956853}
+      objectReference: {fileID: 1018077034}
     - target: {fileID: 7796077391553693550, guid: 9ee412b49c347e64d9cbdcc05461d950, type: 3}
       propertyPath: m_UpdateMethod
       value: 0
