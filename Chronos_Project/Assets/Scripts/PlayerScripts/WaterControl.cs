@@ -42,6 +42,7 @@ public class WaterControl : MonoBehaviour
     {
         if (other.CompareTag("Water"))
         {
+            // Spiele Water Slash Sound
             isInWater = true;
         }
     }
