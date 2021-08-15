@@ -126,7 +126,7 @@ public class PlayerController : MonoBehaviour
         else if ((checkWallrun() == false || Input.GetKeyUp(KeyCode.Space)) && isWallRunning) stopWallrun();
 
         // Sound Abfragen
-        if(grounded && moveSpeed > 0.2f && !audio_walk.isPlaying) {     // Walking Sound
+        if(grounded && rbPlayer.velocity.magnitude > 0.2f && !audio_walk.isPlaying) {     // Walking Sound
             audio_walk.Play();
         }
     }
