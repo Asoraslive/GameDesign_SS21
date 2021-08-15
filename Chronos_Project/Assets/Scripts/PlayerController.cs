@@ -49,6 +49,10 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float gravityForce = 30f;
     [SerializeField] bool gravity = true;
 
+    [Header("Water Movement")]
+    [SerializeField] bool swimming;
+    [SerializeField] float waterdrag = 0f;
+
 
     private float threshold = .01f;
 
@@ -86,6 +90,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float godModeUpForce = 10f;
     [SerializeField] float godModeDownForce = 10f;
 
+    [Header("Sounds")]
+    [SerializeField] bool walksound = false;
+    [SerializeField] bool wallrunsound = false;
+    [SerializeField] bool swimsound = false;
+    [SerializeField] AudioSource audio_walk;
+    [SerializeField] AudioSource audio_wallrun;
+    [SerializeField] AudioSource audio_swmimming;
+    [SerializeField] AudioSource audio_falldown;
+    [SerializeField] AudioSource audio_water_falldown;
+    
 
 
         /*  Awake,Start,Update,FixedUpdate    */
@@ -110,6 +124,11 @@ public class PlayerController : MonoBehaviour
 
         if (checkWallrun() && Input.GetKey(KeyCode.Space) && !isWallRunning && !grounded) startWallrun();
         else if ((checkWallrun() == false || Input.GetKeyUp(KeyCode.Space)) && isWallRunning) stopWallrun();
+
+        // Sound Abfragen
+        if(grounded && moveSpeed > 0.2f && !audio_walk.isPlaying) {     // Walking Sound
+            audio_walk.Play();
+        }
     }
 
     private void FixedUpdate()
@@ -164,6 +183,7 @@ public class PlayerController : MonoBehaviour
     /*Move rb according to moev Dir*/
     public void movePlayer(Vector3 dir) 
     {
+        // Starte Movement Sound------------------------------------------------------------------------------------------------------
 
         //gravity
         if(gravity == true)
@@ -308,6 +328,7 @@ public class PlayerController : MonoBehaviour
     {
         if(currentWall == null ||  currentWall != WallDetect.colnow)
         {
+            // Wall Run Sound starten---------------------------------------------------------------------------------------------------------------
             isWallRunning = true;
             gravity = false;
             upforce = WallrunUpforce;
@@ -319,6 +340,8 @@ public class PlayerController : MonoBehaviour
     /*Stop wallrun*/
     private void stopWallrun()
     {
+        //Beende Wall Run Sound-------------------------------------------------------------------------------------------------------------------
+
         if (wallrunCdCRActive) {
             Debug.Log("Force Shut");
             StopCoroutine(wallrunCd);

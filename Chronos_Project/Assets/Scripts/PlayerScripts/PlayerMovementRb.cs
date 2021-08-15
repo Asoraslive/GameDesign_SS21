@@ -30,6 +30,7 @@ public class PlayerMovementRb : MonoBehaviour
     [SerializeField] float gravity=14.0f;
     [SerializeField] float verticalVelocity;
     [SerializeField] Vector3 gravityMove;
+    [SerializeField] float waterDrag = 0f;
 
     float horizontalMovement;
     float verticalMovement;
@@ -105,7 +106,7 @@ public class PlayerMovementRb : MonoBehaviour
             if (Input.GetButtonDown("Jump") && isGrounded)
             {
                 Jump();
-                jumped = false;
+                jumped = false; // Hier wahrscheinlich True
                 animator.SetTrigger(JumpHash);
                 if (isGrounded)
                 {
@@ -199,14 +200,22 @@ public class PlayerMovementRb : MonoBehaviour
         if (isGrounded)
         {
             rb.drag = groundDrag;
+            if(moveSpeed > 0.02 && !waterControlScript.isInWater) {
+                // Spiele Gehen Sound
+            }
         }
         else if(wallRunScript.currentlyWallrunning)
         {
             rb.drag = WallDrag;
+            // Spiele WallRun Sound
         } 
-        else
+        else if(!waterControlScript.isInWater)
         {
             rb.drag = airDrag;
+        }
+        else {      // Water Drag might need to be adjusted !
+            rb.drag = waterDrag;
+            // Spiele Swim Sound
         }
     }
 
