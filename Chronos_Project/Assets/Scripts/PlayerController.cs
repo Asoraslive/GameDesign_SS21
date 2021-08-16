@@ -54,6 +54,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] bool swimming;
     [SerializeField] float waterdrag = 0f;
     [SerializeField] float water_upforce = 5f;
+    private bool left_water = false;
 
 
     private float threshold = .01f;
@@ -128,7 +129,7 @@ public class PlayerController : MonoBehaviour
         else if ((checkWallrun() == false || Input.GetKeyUp(KeyCode.Space)) && isWallRunning) stopWallrun();
 
         // Sound Abfragen
-        if(grounded && !swimming && rbPlayer.velocity.magnitude > 0.2f && !audio_walk.isPlaying) {     // Walking Sound
+        if(grounded && !swimming && rbPlayer.velocity.magnitude > 0.2f && !audio_walk.isPlaying && !left_water) {     // Walking Sound
             audio_walk.Play();
         }
     }
@@ -176,6 +177,7 @@ public class PlayerController : MonoBehaviour
             swimming = true;
             gravity = false;
             // Slashdown Sound
+            StartCoroutine("startSwimming");
 
             // Starte Swimming Sound--------------------------------------------------------------------------------------------------------
         }
@@ -186,6 +188,8 @@ public class PlayerController : MonoBehaviour
             swimming = false;
             gravity = true;
             // Beende Swimming Sound--------------------------------------------------------------------------------------------------------
+            audio_swmimming.Stop();
+            StartCoroutine("waterLeft");
         }
     }
 
@@ -352,6 +356,11 @@ public class PlayerController : MonoBehaviour
         if(currentWall == null ||  currentWall != WallDetect.colnow)
         {
             // Wall Run Sound starten---------------------------------------------------------------------------------------------------------------
+            if (!left_water)
+            {
+                audio_wallrun.Play();
+            }
+
             isWallRunning = true;
             gravity = false;
             upforce = WallrunUpforce;
@@ -368,6 +377,7 @@ public class PlayerController : MonoBehaviour
     private void stopWallrun()
     {
         //Beende Wall Run Sound-------------------------------------------------------------------------------------------------------------------
+        audio_wallrun.Stop();
 
         if (wallrunCdCRActive) {
             Debug.Log("Force Shut");
@@ -488,4 +498,20 @@ public class PlayerController : MonoBehaviour
         cam.m_Lens.FieldOfView = fov;
     }
     public float getFov() { return fov; }
+
+    IEnumerator startSwimming()
+    {
+        audio_water_falldown.time = 0.4f;
+        audio_water_falldown.Play();
+        yield return new WaitForSeconds(1f);
+        audio_water_falldown.Stop();
+        audio_swmimming.Play();
+    }
+
+    IEnumerator waterLeft()
+    {
+        left_water = true;
+        yield return new WaitForSeconds(0.3f);
+        left_water = false;
+    }
 }
