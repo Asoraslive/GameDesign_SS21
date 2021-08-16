@@ -11,6 +11,7 @@ public class Lockdown : MonoBehaviour{
     [SerializeField] private Material light_bar_lockdown;
     [SerializeField] private AudioSource pickUpSound;
     [SerializeField] private AudioSource lockDownSound;
+    [SerializeField] Tool_Tips tooltips;
 
 
     [SerializeField]
@@ -27,28 +28,25 @@ public class Lockdown : MonoBehaviour{
         if (activate_e && Input.GetKey(KeyCode.E)) {
             activateLockDown();
             startLockDown.Invoke();
+            Destroy(gameObject);
         }
     }
 
     private void OnTriggerEnter(Collider other) {
+        Debug.LogWarning("Enter E Trigger");
         activate_e = true;
+        tooltips.Tip_e(true);
     }
 
     private void OnTriggerExit(Collider other) {
+        Debug.LogWarning("Exit E Trigger");
         activate_e = false;
+        tooltips.Tip_e(false);
     }
 
     private void activateLockDown() {
         Debug.Log("Activte LockDown Protocol !");
         pickUpSound.Play();
-        //animated_light_bar.color = Color.red;
-        StartCoroutine("ldSoundPlayer");
-    }
-
-    IEnumerator ldSoundPlayer()
-    {
-        yield return new WaitForSeconds(1f);
-        animated_light_bar.Lerp(animated_light_bar, light_bar_lockdown, 3.0f);
-        lockDownSound.Play();
+       
     }
 }
