@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.81449723, g: 0.85564333, b: 0.87110466, a: 1}
+  m_IndirectSpecularColor: {r: 0.11763631, g: 0.11889183, b: 0.12027199, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -22575,11 +22575,11 @@ GameObject:
   - component: {fileID: 678235515}
   m_Layer: 0
   m_Name: Future (1)
-  m_TagString: Present
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &678235515
 Transform:
   m_ObjectHideFlags: 0
@@ -36987,6 +36987,10 @@ PrefabInstance:
     - target: {fileID: 3768546979048829778, guid: f72622788705c37409ce6e845e07a143, type: 3}
       propertyPath: active
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3768546979048829778, guid: f72622788705c37409ce6e845e07a143, type: 3}
+      propertyPath: upforce
+      value: 8.12
       objectReference: {fileID: 0}
     - target: {fileID: 3768546979048829778, guid: f72622788705c37409ce6e845e07a143, type: 3}
       propertyPath: soundEnd
