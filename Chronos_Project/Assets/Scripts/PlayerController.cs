@@ -154,8 +154,8 @@ public class PlayerController : MonoBehaviour
         RotatePlayer();
 
 
-        if (Input.GetKeyDown(KeyCode.G)) { godMode = !godMode; if (godMode == true) { gravity = false; } else gravity = true; }
-        GodMode();
+        //if (Input.GetKeyDown(KeyCode.G)) { godMode = !godMode; if (godMode == true) { gravity = false; } else gravity = true; }
+        //GodMode();
         if (!isWallRunning) { movePlayer(moveDir); }
         else if (isWallRunning) RunWall();
 
