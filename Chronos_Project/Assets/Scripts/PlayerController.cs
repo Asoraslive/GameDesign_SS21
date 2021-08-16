@@ -53,6 +53,7 @@ public class PlayerController : MonoBehaviour
     [Header("Water Movement")]
     [SerializeField] bool swimming;
     [SerializeField] float waterdrag = 0f;
+    [SerializeField] float water_upforce = 5f;
 
 
     private float threshold = .01f;
@@ -127,7 +128,7 @@ public class PlayerController : MonoBehaviour
         else if ((checkWallrun() == false || Input.GetKeyUp(KeyCode.Space)) && isWallRunning) stopWallrun();
 
         // Sound Abfragen
-        if(grounded && rbPlayer.velocity.magnitude > 0.2f && !audio_walk.isPlaying) {     // Walking Sound
+        if(grounded && !swimming && rbPlayer.velocity.magnitude > 0.2f && !audio_walk.isPlaying) {     // Walking Sound
             audio_walk.Play();
         }
     }
@@ -170,6 +171,24 @@ public class PlayerController : MonoBehaviour
 
     /*  Simple Movement */
 
+    private void OnTriggerEnter(Collider other) {
+        if (other.CompareTag("Water")) {
+            swimming = true;
+            gravity = false;
+            // Slashdown Sound
+
+            // Starte Swimming Sound--------------------------------------------------------------------------------------------------------
+        }
+    }
+
+    private void OnTriggerExit(Collider other) {
+        if (other.CompareTag("Water")) {
+            swimming = false;
+            gravity = true;
+            // Beende Swimming Sound--------------------------------------------------------------------------------------------------------
+        }
+    }
+
     /*  Get Player Input */
     public Vector3 playerInputHandle() 
     {
@@ -184,7 +203,6 @@ public class PlayerController : MonoBehaviour
     /*Move rb according to moev Dir*/
     public void movePlayer(Vector3 dir) 
     {
-        // Starte Movement Sound------------------------------------------------------------------------------------------------------
 
         //gravity
         if(gravity == true)
@@ -225,7 +243,7 @@ public class PlayerController : MonoBehaviour
     private void CounterMovement(float x, float y, Vector2 mag)
     {
         //No counterMovement (TO-DO if gorunded)
-        if (jumping) return;
+        if (jumping || swimming) return;
 
         //Counter movement
         if (Mathf.Abs(mag.x) > threshold && Mathf.Abs(x) < 0.05f || (mag.x < -threshold && x > 0) || (mag.x > threshold && x < 0))
@@ -342,6 +360,7 @@ public class PlayerController : MonoBehaviour
 
             // Deactivate Tool Tip: Wallride
             tooltipsScript.Tip_wallride(false);
+
         }
     }
 
