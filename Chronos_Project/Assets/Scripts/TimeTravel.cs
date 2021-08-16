@@ -94,7 +94,7 @@ public class TimeTravel : MonoBehaviour
                 Debug.Log(child.gameObject.name + "hat keine Zeit");
             }
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
 
         traveled = false;
     }

@@ -10,12 +10,16 @@ public class Jumppad : MonoBehaviour
 
     [SerializeField] private Material lights_deactivated;
     [SerializeField] private Material lights_activated;
+    [SerializeField] private float soundStart;
+    [SerializeField] private float soundEnd;
+    [SerializeField] private AudioSource jumpPadSound;
 
     private void OnTriggerEnter(Collider other)
     {
         if (active) {
             if (other.CompareTag("Player")) {
                 other.GetComponent<Rigidbody>().AddForce(transform.up * force + other.transform.up * upforce, ForceMode.Impulse);
+                StartCoroutine("playJumpPadSound");
             }
         }
         
@@ -30,5 +34,13 @@ public class Jumppad : MonoBehaviour
         else {
             gameObject.GetComponent<Renderer>().materials[1] = lights_deactivated;
         }
+    }
+
+    IEnumerator playJumpPadSound()
+    {
+        jumpPadSound.time = soundStart;
+        jumpPadSound.Play();
+        yield return new WaitForSeconds(soundEnd);
+        jumpPadSound.Stop();
     }
 }

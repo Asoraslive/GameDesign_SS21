@@ -6,6 +6,7 @@ public class PlayTimeFlash : MonoBehaviour
 {
     public Animator flash;
     private bool played = false;
+    [SerializeField] AudioSource timeTravelSound;
     
     void Update()
     {
@@ -20,9 +21,11 @@ public class PlayTimeFlash : MonoBehaviour
     IEnumerator PlayAnimationFlash ()
     {
         flash.SetTrigger("Flash");
+        timeTravelSound.Play();
         played = true;
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1f);
+        timeTravelSound.Stop();
         played = false;
     }
 }

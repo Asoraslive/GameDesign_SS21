@@ -32,13 +32,33 @@ public class Event_Trigger : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (!activated_tooltip && needLockdown && lockdownactive) {
-            if(tooltip_action == 1) {
-                tooltips.Tip_e(true);
+        if (!activated_tooltip) {
+            if(needLockdown)
+            {
+                if (lockdownactive)
+                {
+                    if (tooltip_action == 1)
+                    {
+                        tooltips.Tip_e(true);
+                    }
+                    else
+                    {
+                        tooltips.Tip_timeswap(true);
+                    }
+                }
             }
-            else {
-                tooltips.Tip_timeswap(true);
+            else
+            {
+                if (tooltip_action == 1)
+                {
+                    tooltips.Tip_e(true);
+                }
+                else
+                {
+                    tooltips.Tip_timeswap(true);
+                }
             }
+            
            
             activated_tooltip = true;
         }
