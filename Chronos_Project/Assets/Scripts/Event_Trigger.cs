@@ -5,9 +5,9 @@ using UnityEngine.Events;
 
 public class Event_Trigger : MonoBehaviour {
 
-    private bool activate_e = false;
-    private bool activated = false;
-    private bool activated_tooltip = false;
+    [SerializeField] bool activate_e = false;
+    [SerializeField] bool activated = false;
+    [SerializeField] bool activated_tooltip = false;
 
     [SerializeField]
     private UnityEvent TriggerEvent;
@@ -16,13 +16,14 @@ public class Event_Trigger : MonoBehaviour {
     [SerializeField] Tool_Tips tooltips;
     [SerializeField] int tooltip_action = 1;
     [SerializeField] bool needLockdown = false;
-    private bool lockdownactive = false;
+    [SerializeField] bool lockdownactive = false;
 
     // Start is called before the first frame update
 
     // Update is called once per frame
     void Update() {
         if (!activated && activate_e && Input.GetKey(KeyCode.E)) {
+            activated_tooltip = true;
             TriggerEvent.Invoke();
             if (useButtonSound) {
                 buttonSound.Play();
@@ -40,10 +41,12 @@ public class Event_Trigger : MonoBehaviour {
                     if (tooltip_action == 1)
                     {
                         tooltips.Tip_e(true);
+                        //activated_tooltip = true;
                     }
                     else
                     {
                         tooltips.Tip_timeswap(true);
+                        //activated_tooltip = true;
                     }
                 }
             }
@@ -52,15 +55,17 @@ public class Event_Trigger : MonoBehaviour {
                 if (tooltip_action == 1)
                 {
                     tooltips.Tip_e(true);
+                    //activated_tooltip = true;
                 }
                 else
                 {
                     tooltips.Tip_timeswap(true);
+                    //activated_tooltip = true;
                 }
             }
             
            
-            activated_tooltip = true;
+            
         }
         if (needLockdown) {
             if (lockdownactive) {
