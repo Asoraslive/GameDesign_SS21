@@ -14,6 +14,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] AnimationStateController animationStateController;
     [SerializeField] CinemachineVirtualCamera cam;
     [SerializeField] PauseMenu pauseMenuScript;
+    [SerializeField] Tool_Tips tooltipsScript;
 
 
 
@@ -279,8 +280,12 @@ public class PlayerController : MonoBehaviour
             rbPlayer.velocity = new Vector3(vel.x, 0, vel.z);
         else if (rbPlayer.velocity.y > 0)
             rbPlayer.velocity = new Vector3(vel.x, vel.y / 2, vel.z);
-        
-        if (!grounded) djumping = false;
+
+        if (!grounded) {
+            djumping = false;
+            // Deactivate Tool Tip: DoubleJump
+            tooltipsScript.Tip_doublejump(false);
+        }
 
         //play animation
         animationStateController.TriggerJump();
@@ -334,6 +339,9 @@ public class PlayerController : MonoBehaviour
             upforce = WallrunUpforce;
             djumping = true;
             currentWall = WallDetect.colnow;
+
+            // Deactivate Tool Tip: Wallride
+            tooltipsScript.Tip_wallride(false);
         }
     }
 
