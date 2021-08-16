@@ -181,7 +181,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Project Manager\n\n\n\n\nCharacter Controls\n\n\nMap Design  \n3D Artist\n\n\nSound
-    Design  \nDeveloper\n\n\nAssets"
+    Design  \nDeveloper\n\n\nSound Assets \n\n\n\n\n\n\n\n\n\n\n\n3D Assets\n\n"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
@@ -1110,38 +1110,40 @@ MonoBehaviour:
 
 
 
-    Hadron Studio -  Character Model
-
-
-    Daniel
-    Gooding - Background Music
-
-
-    MGWSoundDesign - Sound Effects
+    MGWSoundDesign
 
 
     Nox_Sounds
-    - Sound Effects
 
 
-    BBC - Sound Effects
+    BBC
 
 
-    Little Robot Sound Factory -
-    Sound Effects
+    Little
+    Robot Sound Factory
 
 
-    freesound - Sound Effects
+    freesound
+
+
+    Daniel Gooding
+
+
+    Hadron Studiol
+    - Character Model
 
 
     UNITY TECHNOLOGIES - VFX
 
 
+    MenufacturaK4 - Rock and
+    Boulders 2
 
 
+    Pixel Games -  Realistic Tree 9
 
 
-'
+    forst - conifiers [BOTD]'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: e73a58f6e2794ae7b1b7e50b7fb811b0, type: 2}
